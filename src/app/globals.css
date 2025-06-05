@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #cf1941;
+  --secondary: #dc1d46;
+  --font-heading: "Marcellus", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: var(--font-heading) !important;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 1280px) {
+  header {
+    padding-left: 8px;
+  }
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  header .container {
+    margin: 0;
+    padding: 0;
+  }
+}
+input {
+  outline-color: #cf1941;
+}
+input:focus-visible {
+  outline-color: #cf1941;
+}
