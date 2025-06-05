@@ -3,7 +3,7 @@ import React from "react";
 
 function Hero() {
   return (
-    <section className="relative">
+    <section className="relative hero">
       <div className="container grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4">
         <div className="flex flex-col gap-2 justify-center pt-8 md:pt-0">
           <h1 className="text-3xl md:text-5xl">
