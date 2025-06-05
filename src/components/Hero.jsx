@@ -47,7 +47,9 @@ function Hero() {
               </div>
             </div>
           </div>
-          <h3 className="text-3xl text-black mt-2">Fresno, California</h3>
+          <h3 className="text-2xl sm:text-3xl text-black mt-2">
+            Fresno, California
+          </h3>
         </div>
         <div>
           <Image
