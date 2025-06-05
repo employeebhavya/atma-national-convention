@@ -53,9 +53,12 @@ button {
     padding: 0;
   }
 }
-input {
-  outline-color: #cf1941;
-}
+input:focus,
 input:focus-visible {
-  outline-color: #cf1941;
+  outline: 1px solid black;
+  outline-offset: 1px;
+}
+input[type="checkbox"] {
+  accent-color: #dc1d46;
+  outline: none;
 }

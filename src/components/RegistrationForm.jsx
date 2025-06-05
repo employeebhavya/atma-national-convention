@@ -472,7 +472,7 @@ export default function RegistrationForm() {
           {/* Terms and Payment */}
           <div className="space-y-8">
             <div className="flex items-start">
-              <div className="flex items-center h-5">
+              <div className="flex items-center h-6">
                 <input
                   id="agreeTerms"
                   name="agreeTerms"
