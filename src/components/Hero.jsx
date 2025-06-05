@@ -6,7 +6,7 @@ function Hero() {
     <section className="relative hero">
       <div className="container grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4">
         <div className="flex flex-col gap-2 justify-center pt-8 md:pt-0">
-          <h1 className="text-3xl md:text-5xl">
+          <h1 className="text-3xl md:text-[45px]">
             Welcome to the{" "}
             <span className="text-[#cf1941]">
               16th ATMA National Convention - 2025!
