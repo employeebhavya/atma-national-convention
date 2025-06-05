@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className="relative bg-[#e9e9e9] md:bg-transparent">
       <div className="container flex gap-8 items-center justify-between">
-        <div className="flex items-center justify-center pl-5 md:pl-0">
+        <div className="flex items-center justify-center">
           <Image
             src={"/logos/logo.png"}
             width={370}
@@ -16,7 +16,7 @@ function Header() {
             className="h-auto object-cover"
           />
         </div>
-        <div className="flex items-center justify-end gap-4 bg-[#E9E9E9] w-full h-full p-2 pr-5 md:p-4">
+        <div className="flex items-center justify-end gap-4 bg-[#E9E9E9] w-full h-full py-2 md:p-4">
           <div className="hidden md:flex gap-2 items-center">
             <Link
               href={"#"}
@@ -69,7 +69,7 @@ function Header() {
           </div>
           <div>
             <Link href={"#form"}>
-              <button className="bg-[#dc1d46] text-white px-5 py-2 text-lg hover:bg-black transition-all duration-300 cursor-pointer">
+              <button className="bg-[#dc1d46] text-white px-3 sm:px-5 py-2 text-base hover:bg-black transition-all duration-300 cursor-pointer">
                 Register Now
               </button>
             </Link>

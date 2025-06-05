@@ -205,7 +205,9 @@ export default function RegistrationForm() {
   return (
     <section className="relative my-14" id="form">
       <div className="container bg-white">
-        <h1 className="text-3xl text-center mb-8">ATMA Registration Form</h1>
+        <h1 className="text-2xl md:text-3xl text-center mb-8">
+          ATMA Registration Form
+        </h1>
 
         <form className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -25,7 +25,9 @@ function SpecialHighlights() {
     <section className="py-14 relative bg-[#F4F4F4]">
       <div className="container grid grid-cols-1 xl:grid-cols-3 gap-8">
         <div className="col-span-1">
-          <h2 className="text-3xl text-black">Special Highlights</h2>
+          <h2 className="text-2xl md:text-3xl text-black">
+            Special Highlights
+          </h2>
         </div>
         <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
           {spclHighlights.map((item, index) => (

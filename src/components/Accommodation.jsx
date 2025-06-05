@@ -6,7 +6,9 @@ function Accommodation() {
     <section className="my-14 relative">
       <div className="container bg-[#DEDEDE] p-8">
         <div className="md:max-w-[70%]">
-          <h2 className="text-3xl text-black mb-2">Accommodation</h2>
+          <h2 className="text-2xl md:text-3xl text-black mb-2">
+            Accommodation
+          </h2>
           <p className="text-base text-black">
             Hotel rooms are available at a discounted rate of $172 per night (+
             tax) for ATMA convention attendees at the Double Tree Hotel, Fresno.

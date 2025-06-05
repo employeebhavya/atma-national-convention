@@ -17,7 +17,7 @@ function WhyAttend() {
           />
         </div>
         <div className="flex flex-col gap-6 items-start">
-          <h2 className="text-3xl text-black">
+          <h2 className="text-2xl md:text-3xl text-black">
             Why Attend the 16th ATMA National Convention - 2025?
           </h2>
           <ul className="list-disc list-inside pl-2 text-base text-black flex flex-col gap-3">
