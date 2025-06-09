@@ -6,7 +6,7 @@ function Hero() {
     <section className="relative hero">
       <div className="container grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4">
         <div className="flex flex-col gap-2 justify-center pt-8 md:pt-0">
-          <h1 className="text-2xl md:text-[45px]">
+          <h1 className="text-2xl md:text-[48px]">
             Welcome to the{" "}
             <span className="text-[#cf1941]">
               16th ATMA National Convention - 2025!
@@ -29,7 +29,7 @@ function Hero() {
               />
               <div>
                 <h3 className="text-xl sm:text-2xl uppercase">22 - 24</h3>
-                <p className="text-sm sm:text-base uppercase">july 2025</p>
+                <p className="text-sm sm:text-base uppercase">August 2025</p>
               </div>
             </div>
             <div className="flex items-center gap-2">

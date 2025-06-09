@@ -13,7 +13,7 @@ const atmaList = [
     desc: `Indulge in South Indian flavors and fusion cuisine.`,
   },
   {
-    img: "/images/vibrant.webp",
+    img: "/images/vibrant.png",
     title: "Vibrant Entertainment",
     desc: `Enjoy live performances, entertainment, and cinematic experiences.`,
   },

@@ -5,7 +5,7 @@ import React from "react";
 function Header() {
   return (
     <header className="relative bg-[#e9e9e9] md:bg-transparent">
-      <div className="container flex items-center justify-between">
+      <div className="container flex items-center md:gap-8 justify-between">
         <div className="flex items-center justify-center">
           <Image
             src={"/logos/logo.png"}
