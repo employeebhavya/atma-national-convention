@@ -6,7 +6,7 @@ function Accommodation() {
     <section className="my-14 relative">
       <div className="container bg-[#DEDEDE] p-8">
         <div className="md:max-w-[70%]">
-          <h2 className="text-2xl md:text-3xl text-black mb-2">
+          <h2 className="text-2xl lg:text-3xl text-black mb-2">
             Accommodation
           </h2>
           <p className="text-base text-black">

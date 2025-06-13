@@ -4,8 +4,8 @@ import React from "react";
 function President() {
   return (
     <section className="py-14 bg-[#f4f4f4]">
-      <div className="container grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div className="relative md:col-span-1">
+      <div className="container grid grid-cols-1 lg:grid-cols-4 gap-12">
+        <div className="relative lg:col-span-1">
           <Image
             src={"/president.jpg"}
             width={467}
@@ -18,7 +18,7 @@ function President() {
             Service to Humanity is Service to God
           </h4>
         </div>
-        <div className="md:col-span-3 flex flex-col gap-3">
+        <div className="lg:col-span-3 flex flex-col gap-3">
           <p className="text-base text-gray-500">OUR MESSAGE</p>
           <h2 className="text-2xl sm:text-3xl text-black">
             Strength in Service: A Message from the President

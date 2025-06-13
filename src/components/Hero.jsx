@@ -4,9 +4,9 @@ import React from "react";
 function Hero() {
   return (
     <section className="relative hero">
-      <div className="container grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4">
-        <div className="flex flex-col gap-2 justify-center pt-8 md:pt-0">
-          <h1 className="text-2xl md:text-[48px]">
+      <div className="container grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4">
+        <div className="flex flex-col gap-2 justify-center pt-8 lg:pt-0">
+          <h1 className="text-2xl md:text-[47px]">
             Welcome to the{" "}
             <span className="text-[#cf1941]">
               16th ATMA National Convention - 2025!

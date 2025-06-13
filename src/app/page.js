@@ -4,6 +4,8 @@ import Hero from "@/components/Hero";
 import President from "@/components/President";
 import RegistrationForm from "@/components/RegistrationForm";
 import SpecialHighlights from "@/components/SpecialHighlights";
+import Team from "@/components/Team";
+import TravelAndShuttle from "@/components/TravelAndShuttle";
 import WhyAttend from "@/components/WhyAttend";
 
 export default function Home() {
@@ -17,6 +19,8 @@ export default function Home() {
       <RegistrationForm />
       <Accommodation />
       <WhyAttend />
+      <Team />
+      <TravelAndShuttle />
     </div>
   );
 }

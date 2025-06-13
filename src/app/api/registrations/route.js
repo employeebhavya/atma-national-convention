@@ -42,9 +42,11 @@ export async function POST(request) {
         registrationData.lastName
       }</p>
             <p><strong>Registration Type:</strong> ${
-              registrationData.registrationType
+              registrationData.registrationLabel
             }</p>
-            <p><strong>Amount:</strong> $${registrationData.amount}</p>
+            <p><strong>Amount:</strong> $${parseInt(
+              registrationData.amount
+            ).toLocaleString()}</p>
             <p><strong>Transaction ID:</strong> ${
               registrationData.transactionId
             }</p>
@@ -66,8 +68,8 @@ export async function POST(request) {
     // Email to ATMA admin
     const adminMailOptions = {
       from: `ATMA National Convention - 2025 Registration <${process.env.ZOHO_MAIL_USER}>`,
-      //   to: "Atmausapresident@gmail.com",
-      to: "riturajsingh3001@gmail.com",
+      to: "Atmausapresident@gmail.com",
+      // to: "riturajsingh3001@gmail.com",
       subject: `New Registration - ${registrationData.firstName} ${registrationData.lastName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -75,12 +77,20 @@ export async function POST(request) {
           
           <div style="background-color: #f7fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h2 style="color: #2d3748;">Registration Details</h2>
-            <p><strong>Name:</strong> ${registrationData.firstName} ${registrationData.lastName}</p>
+            <p><strong>Name:</strong> ${registrationData.firstName} ${
+        registrationData.lastName
+      }</p>
             <p><strong>Email:</strong> ${registrationData.email}</p>
             <p><strong>Phone:</strong> ${registrationData.phone}</p>
-            <p><strong>Registration Type:</strong> ${registrationData.registrationType}</p>
-            <p><strong>Amount:</strong> $${registrationData.amount}</p>
-            <p><strong>Transaction ID:</strong> ${registrationData.transactionId}</p>
+            <p><strong>Registration Type:</strong> ${
+              registrationData.registrationLabel
+            }</p>
+            <p><strong>Amount:</strong> $${parseInt(
+              registrationData.amount
+            ).toLocaleString()}</p>
+            <p><strong>Transaction ID:</strong> ${
+              registrationData.transactionId
+            }</p>
           </div>
         </div>
       `,

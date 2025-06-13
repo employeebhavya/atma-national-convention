@@ -17,6 +17,7 @@ const registrationSchema = new mongoose.Schema({
   vegetarianMeals: { type: Number, required: true, default: 1 },
   nonVegetarianMeals: { type: Number, required: true, default: 1 },
   registrationType: { type: String, required: true },
+  registrationLabel: { type: String, required: true },
   amount: { type: Number, required: true },
   transactionId: { type: String, required: true },
   paymentStatus: { type: String, required: true, default: "pending" },

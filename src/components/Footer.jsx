@@ -10,7 +10,7 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Contact 1 */}
           <div className="bg-gray-200 p-6 rounded-lg hover:bg-gray-300 transition-colors">
             <h4 className="text-lg font-semibold text-black mb-3">

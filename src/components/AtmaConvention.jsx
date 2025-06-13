@@ -29,7 +29,7 @@ function AtmaConvention() {
     <section className="relative py-14">
       <div className="container flex flex-col gap-8">
         <div className="flex flex-col items-center justify-center">
-          <h2 className="text-2xl md:text-3xl text-black text-center ">
+          <h2 className="text-2xl lg:text-3xl text-black text-center ">
             What to Expect at the ATMA Convention
           </h2>
           <hr className="w-20 mt-2 border-2 text-[#dc1d46]" />
