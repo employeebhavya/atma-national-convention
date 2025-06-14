@@ -685,7 +685,7 @@ export default function RegistrationForm() {
                                 <span className="text-sm text-[#dc1d46] border border-[#dc1d46] px-3 py-1.5">
                                   {(subOption.value === "family_adult"
                                     ? quantities.familyAdult
-                                    : quantities.familyKids) || "Select"}
+                                    : quantities.familyKids) || "0"}
                                 </span>
                                 <button
                                   type="button"
@@ -761,7 +761,7 @@ export default function RegistrationForm() {
                               ? quantities.specialGuest
                               : option.value === "student_guest"
                               ? quantities.medicalGuest
-                              : quantities.yosemiteGuest) || "Select"}
+                              : quantities.yosemiteGuest) || "0"}
                           </span>
                           <button
                             type="button"

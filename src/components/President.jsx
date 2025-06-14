@@ -14,7 +14,7 @@ function President() {
             quality={100}
             className="w-full h-full object-cover"
           />
-          <h4 className="absolute right-0 bottom-0 text-base bg-[#f9c5d0] p-2 w-[70%] text-center">
+          <h4 className="absolute right-0 bottom-0 text-base bg-[#f9c5d0] p-2 w-[80%] lg:w-[60%] text-center">
             Service to Humanity is Service to God
           </h4>
         </div>
