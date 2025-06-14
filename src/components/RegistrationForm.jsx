@@ -27,6 +27,13 @@ export default function RegistrationForm() {
     agreeTerms: false,
   });
 
+  const updateMealQuantity = (key, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [key]: Math.max(0, value),
+    }));
+  };
+
   const [quantities, setQuantities] = useState({
     specialGuest: 0,
     familyAdult: 0,
@@ -584,30 +591,75 @@ export default function RegistrationForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-base font-medium text-gray-600 mb-1">
+                    <label className="block text-base font-medium text-gray-600 mb-5">
                       Number Of Vegetarian Meals
                     </label>
-                    <input
-                      type="number"
-                      name="vegetarianMeals"
-                      value={formData.vegetarianMeals}
-                      onChange={handleChange}
-                      min="0"
-                      className="w-full border-b border-gray-500"
-                    />
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          updateMealQuantity(
+                            "vegetarianMeals",
+                            formData.vegetarianMeals - 1
+                          )
+                        }
+                        className="px-3 py-1 border border-[#dc1d46] text-[#dc1d46] hover:bg-[#dc1d46] hover:text-white cursor-pointer"
+                        disabled={formData.vegetarianMeals <= 0}
+                      >
+                        -
+                      </button>
+                      <span className="text-sm text-[#dc1d46] border border-[#dc1d46] px-3 py-1.5">
+                        {formData.vegetarianMeals}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          updateMealQuantity(
+                            "vegetarianMeals",
+                            formData.vegetarianMeals + 1
+                          )
+                        }
+                        className="px-3 py-1 border border-[#dc1d46] text-[#dc1d46] hover:bg-[#dc1d46] hover:text-white cursor-pointer"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
+
                   <div>
-                    <label className="block text-base font-medium text-gray-600 mb-1">
+                    <label className="block text-base font-medium text-gray-600 mb-5">
                       Number Of Non Vegetarian Meals
                     </label>
-                    <input
-                      type="number"
-                      name="nonVegetarianMeals"
-                      value={formData.nonVegetarianMeals}
-                      onChange={handleChange}
-                      min="0"
-                      className="w-full border-b border-gray-500"
-                    />
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          updateMealQuantity(
+                            "nonVegetarianMeals",
+                            formData.nonVegetarianMeals - 1
+                          )
+                        }
+                        className="px-3 py-1 border border-[#dc1d46] text-[#dc1d46] hover:bg-[#dc1d46] hover:text-white cursor-pointer"
+                        disabled={formData.nonVegetarianMeals <= 0}
+                      >
+                        -
+                      </button>
+                      <span className="text-sm text-[#dc1d46] border border-[#dc1d46] px-3 py-1.5">
+                        {formData.nonVegetarianMeals}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          updateMealQuantity(
+                            "nonVegetarianMeals",
+                            formData.nonVegetarianMeals + 1
+                          )
+                        }
+                        className="px-3 py-1 border border-[#dc1d46] text-[#dc1d46] hover:bg-[#dc1d46] hover:text-white cursor-pointer"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
