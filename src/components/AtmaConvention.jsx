@@ -45,7 +45,7 @@ function AtmaConvention() {
                 quality={100}
                 className="w-full h-auto object-cover"
               />
-              <h3 className="text-xl font-semibold mt-2">{list.title}</h3>
+              <h3 className="text-xl font-medium mt-2">{list.title}</h3>
               <p className="text-base text-black">{list.desc}</p>
             </div>
           ))}

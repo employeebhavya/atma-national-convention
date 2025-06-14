@@ -7,7 +7,7 @@ function Team() {
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4">
           <div className="col-span-2">
-            <h2 className="text-2xl lg:text-3xl text-black">
+            <h2 className="text-2xl lg:text-3xl text-black -mt-1">
               Team at Annual Convention
             </h2>
           </div>
