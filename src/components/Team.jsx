@@ -38,7 +38,7 @@ function Team() {
               loading="lazy"
               quality={100}
             />
-            <h3 className="text-lg font-semibold">Mr. Prabu</h3>
+            <h3 className="text-lg font-semibold">Mr. Prabu, PRO</h3>
             <p className="text-sm text-gray-600">ATMA. California State</p>
           </div>
           <div className="flex flex-col gap-2">
