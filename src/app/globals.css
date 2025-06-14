@@ -58,3 +58,13 @@ input[type="checkbox"] {
   accent-color: #dc1d46;
   outline: none;
 }
+@media only screen and (min-width: 1300px) and (max-width: 1450px) {
+  header .container,
+  .hero .container {
+    margin-right: 0 !important;
+    max-width: 95% !important;
+  }
+  header .container > div:last-child {
+    padding-right: 6vw !important;
+  }
+}
