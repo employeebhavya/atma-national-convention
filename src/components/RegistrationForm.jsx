@@ -617,7 +617,7 @@ export default function RegistrationForm() {
             <h2 className="text-xl font-bold text-black mb-4">
               Registration Type<span className="text-red-500">*</span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 [1300px]:grid-cols-5 gap-4">
               {registrationOptions.map((option) => (
                 <div
                   key={option.value}
