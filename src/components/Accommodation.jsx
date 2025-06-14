@@ -15,10 +15,8 @@ function Accommodation() {
             className="w-full h-auto"
           />
         </div>
-        <div className="col-span-2 flex flex-col gap-4">
-          <h2 className="text-2xl lg:text-3xl text-black mb-2">
-            Accommodation
-          </h2>
+        <div className="col-span-2 flex flex-col gap-2">
+          <h2 className="text-2xl lg:text-3xl text-black">Accommodation</h2>
           <p className="text-base text-black">
             <strong>Hotel Stay:</strong> DoubleTree by Hilton, Fresno Downtown
           </p>

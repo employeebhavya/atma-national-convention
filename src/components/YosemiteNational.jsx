@@ -14,7 +14,7 @@ function YosemiteNational() {
             className="w-full h-auto object-cover"
           />
         </div>
-        <div className="col-span-2 flex flex-col gap-4 md:gap-8">
+        <div className="col-span-2 flex flex-col gap-6">
           <h2 className="text-2xl lg:text-3xl text-black mb-2">
             Yosemite National Park Tour
           </h2>
