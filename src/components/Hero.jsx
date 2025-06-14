@@ -4,7 +4,7 @@ import React from "react";
 function Hero() {
   return (
     <section className="relative hero">
-      <div className="container grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4">
+      <div className="container relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4">
         <div className="flex flex-col gap-2 justify-center pt-8 lg:pt-0">
           <h1 className="text-2xl md:text-[47px]">
             Welcome to the{" "}
@@ -48,9 +48,17 @@ function Hero() {
             </div>
           </div>
           <h3 className="text-2xl sm:text-3xl text-black mt-2">
-            Fresno, California
+            Fresno Masonic Hall, California
           </h3>
         </div>
+        <Image
+          src={"/early.png"}
+          width={100}
+          height={100}
+          alt="image"
+          quality={100}
+          className="w-[150px] h-[150px] object-cover absolute top-[62%] left-[80%] md:top-[28%] md:left-[75%] lg:top-[65%] lg:left-[45%] transform -translate-y-1/2 -translate-x-1/2"
+        />
         <div>
           <Image
             src={"/hero.png"}

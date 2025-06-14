@@ -19,8 +19,8 @@ export default function RegistrationForm() {
     specialty: "",
     spouseName: "",
     childrenNames: "",
-    vegetarianMeals: 1,
-    nonVegetarianMeals: 1,
+    vegetarianMeals: 0,
+    nonVegetarianMeals: 0,
     registrationType: "",
     registrationLabel: "",
     amount: "",
@@ -47,13 +47,13 @@ export default function RegistrationForm() {
     {
       label: "Platinum Donor",
       value: "platinum_family",
-      amount: 2000,
+      amount: 2500,
       description: [
         "Includes: Spouse and Blood Relatives",
-        "Special Recognition",
-        "Front-row seating",
-        "Stage Introduction (5–10 mins)",
+        "Special Recognition & Front-row seating",
+        "Stage Introduction (5-10 mins)",
         "Eligible for prize distribution",
+        "Full-page souvenir feature (family photo)",
       ],
       buttonText: "Select Platinum",
     },
@@ -62,8 +62,10 @@ export default function RegistrationForm() {
       value: "gold_couple",
       amount: 2000,
       description: [
-        "Next-row seating behind Platinum",
-        "Stage Introduction (2–3 mins)",
+        "Reserved next-row table behind Platinum group",
+        "Stage time: 2-3 minutes (introduction)",
+        "Half-page souvenir feature (family photo)",
+        "Recognition during event",
       ],
       buttonText: "Select Gold",
     },
@@ -117,10 +119,14 @@ export default function RegistrationForm() {
       perPerson: 100,
     },
     {
-      label: "Yosemite One-Day Trip (Optional)",
+      label: "Yosemite National Park Tour",
       value: "yosemite_trip",
       perPerson: 100,
-      description: ["Includes transport + entry", "Saturday | 6 AM – 6 PM"],
+      description: [
+        "Includes transport + entry",
+        "A one-day event on 23 August 2025",
+        "Saturday | 6 AM - 6 PM",
+      ],
     },
   ];
 
@@ -580,7 +586,6 @@ export default function RegistrationForm() {
                   <div>
                     <label className="block text-base font-medium text-gray-600 mb-1">
                       Number Of Vegetarian Meals
-                      <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="number"
@@ -589,13 +594,11 @@ export default function RegistrationForm() {
                       onChange={handleChange}
                       min="0"
                       className="w-full border-b border-gray-500"
-                      required
                     />
                   </div>
                   <div>
                     <label className="block text-base font-medium text-gray-600 mb-1">
                       Number Of Non Vegetarian Meals
-                      <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="number"
@@ -604,7 +607,6 @@ export default function RegistrationForm() {
                       onChange={handleChange}
                       min="0"
                       className="w-full border-b border-gray-500"
-                      required
                     />
                   </div>
                 </div>
@@ -628,19 +630,19 @@ export default function RegistrationForm() {
                   }`}
                 >
                   <div className="flex-grow">
-                    <h3 className="text-lg font-bold text-black mb-2">
+                    <h3 className="text-lg font-medium text-black mb-2">
                       {option.label}
                     </h3>
 
                     {option.description && (
-                      <ul className="text-sm text-gray-600 space-y-1 mb-4">
+                      <ul className="text-base text-gray-800 space-y-1 mb-4">
                         {option.description.map((item, index) => (
                           <li key={index}>• {item}</li>
                         ))}
                       </ul>
                     )}
                     {option.note && (
-                      <p className="text-sm text-gray-500 mb-4">
+                      <p className="text-base text-gray-800 mb-4">
                         {option.note}
                       </p>
                     )}
@@ -652,7 +654,7 @@ export default function RegistrationForm() {
                       <div className="space-y-3">
                         {option.options.map((subOption) => (
                           <div key={subOption.value} className="space-y-2">
-                            <p className="text-gray-700 text-sm">
+                            <p className="text-gray-800 text-base">
                               {subOption.label}
                             </p>
                             <p className="text-lg font-bold text-[#dc1d46]">

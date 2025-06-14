@@ -7,6 +7,7 @@ import SpecialHighlights from "@/components/SpecialHighlights";
 import Team from "@/components/Team";
 import TravelAndShuttle from "@/components/TravelAndShuttle";
 import WhyAttend from "@/components/WhyAttend";
+import YosemiteNational from "@/components/YosemiteNational";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <SpecialHighlights />
       <RegistrationForm />
       <Accommodation />
+      <YosemiteNational />
       <WhyAttend />
       <Team />
       <TravelAndShuttle />
