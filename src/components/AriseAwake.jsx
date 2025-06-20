@@ -15,11 +15,11 @@ function AriseAwake() {
             className="w-full h-auto"
           />
         </div>
-        <div className=" flex flex-col gap-4">
-          <h2 className="text-2xl lg:text-3xl text-black flex gap-4 items-center">
-            <span className="text-gray-700 font-bold">Arise!</span>
-            <span className="text-gray-900 font-bold">Awake!!</span>
-            <span className="text-[#dc1d46] font-bold">Achieve!!!</span>
+        <div className=" flex flex-col gap-3">
+          <h2 className="text-3xl text-black flex gap-4 items-center">
+            <span className="text-[#2f41dd] font-bold">Arise!</span>
+            <span className="text-[#ff600e] font-bold">Awake!!</span>
+            <span className="text-[#cc415e] font-bold">Achieve!!!</span>
           </h2>
           <p className="text-sm 2xl:text-base text-black font-semibold">
             Do What you Can ! <br />
@@ -56,6 +56,18 @@ function AriseAwake() {
             We invite you all to join us in this effort — to make the function a
             great success and take the organization forward to yet another
             level.
+          </p>
+          <p>
+            We are doing many charitable works in North America and globally,
+            please refer to main website{" "}
+            <Link
+              className="text-base font-semibold italic"
+              href="https://atmausa.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              atmausa.org
+            </Link>
           </p>
         </div>
       </div>
