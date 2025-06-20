@@ -65,10 +65,10 @@ export default function RegistrationForm() {
       amount: 1950,
       description: [
         "Spouse and Blood Relatives",
-        "Special Recognition & Front-row seating",
+        "Front Row Seating & Recognition",
         "Stage time 5 mins",
         "Awardee for Winners",
-        "Full Page of souvenir family photos and other achievements details",
+        "Full Page of Souvenir Family Photos and other Achievements details",
       ],
       buttonText: "Select Platinum",
     },
@@ -79,8 +79,8 @@ export default function RegistrationForm() {
       description: [
         "Reservation for next Row to Platinum group",
         "Stage time 3 mins",
-        "Half Page of Souvenir for featuring family photos & Achievements",
-        "Recognition during event",
+        "Half Page of Souvenir for Featuring Family Photos & Achievements",
+        "Recognition during Event",
       ],
       buttonText: "Select Gold",
     },
@@ -106,7 +106,7 @@ export default function RegistrationForm() {
       label: "Allied Medical Group",
       value: "special_guest",
       perPerson: 200,
-      description: ["Includes PA, NP, RN, LVN, PCA, Technicians"],
+      description: ["PA, NP, RN, LVN, PCA and all Medical Technicians"],
     },
     {
       label: "Family Guest",
@@ -118,12 +118,12 @@ export default function RegistrationForm() {
           perPerson: 150,
         },
         {
-          label: "Kids Below 15 years - 5 years old: $100 Each for three days",
+          label: "Kids Below 15 years - 5 years old: $100 for three days",
           value: "family_kids",
           perPerson: 100,
         },
       ],
-      note: "Kids below 3 yrs: Free",
+      note: "Kids below 5 yrs: No fees",
     },
     {
       label: "Medical Students, Foreign students and  foreign Guests",
@@ -930,9 +930,9 @@ export default function RegistrationForm() {
                         <p className="text-lg font-bold text-[#dc1d46]">
                           ${option.amount.toLocaleString()}
                           {option.label === "Platinum Donor" &&
-                            " (Physician Family)"}
+                            " (Physician & Spouse)"}
                           {option.label === "Gold Donor" &&
-                            " (Physician + Spouse)"}
+                            " (Physician & Spouse)"}
                         </p>
                         <button
                           type="button"

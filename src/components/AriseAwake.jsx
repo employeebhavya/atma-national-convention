@@ -5,8 +5,8 @@ import React from "react";
 function AriseAwake() {
   return (
     <section className="relative py-14 bg-[#DEDEDE]">
-      <div className="container grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-        <div className="col-span-1">
+      <div className="container flex flex-col lg:flex-row gap-8 items-center">
+        <div className="w-full lg:w-[160%] 2xl:w-full h-auto relative">
           <Image
             src="/arise.png"
             alt="arise"
@@ -15,33 +15,47 @@ function AriseAwake() {
             className="w-full h-auto"
           />
         </div>
-        <div className="col-span-2 flex flex-col gap-4">
-          <h2 className="text-2xl lg:text-3xl text-black">
-            Arise! Awake!! Achieve!!!
+        <div className=" flex flex-col gap-4">
+          <h2 className="text-2xl lg:text-3xl text-black flex gap-4 items-center">
+            <span className="text-gray-700 font-bold">Arise!</span>
+            <span className="text-gray-900 font-bold">Awake!!</span>
+            <span className="text-[#dc1d46] font-bold">Achieve!!!</span>
           </h2>
-          <p className="text-base text-[#dc1d46] font-bold">
-            Do what you can, with what you have, where you are.Empower yourself
-            – Empower others
+          <p className="text-sm 2xl:text-base text-black font-semibold">
+            Do What you Can ! <br />
+            With what you have !! <br />
+            Where You are !!! <br />
+            Empower yourself !! <br />
+            Empowers others !!!
           </p>
           <p>
-            The compassion and love of Tamilians know no bounds. What began in
-            2005 as a small effort by ten physicians has grown into the American
-            Tamil Medical Association (ATMA) — a vibrant, charitable
-            organization of over 800 healthcare professionals united in service,
-            like the ever-growing roots of a banyan tree (ஆலமரத்தின் விழுதுகள்
-            போலும்).
+            The compassion and love of Tamilians knows no bounds; what began as
+            a small effort in America has now united hundreds of medical
+            professionals, becoming a pillar of humanity — likened to a banyan
+            tree with its massive tentacles (ஆலமரத்தின் விழுதுகள் போலும்).
           </p>
           <p>
-            As the California Chapter of ATMA, we are proud to host our first
-            annual convention, a humble yet meaningful step toward taking ATMA
-            to new heights.
+            Our knowledge and care must always serve as noble acts that give
+            life, uplift, and support the underserved.
+            <br />{" "}
+            <span className="text-base font-semibold italic">— ATMA</span>
           </p>
           <p>
-            We invite you to be part of this mission — to serve, uplift, and
-            grow together.
+            In January 2005, a group of ten Tamil physicians in the United
+            States established the American Tamil Medical Association (ATMA).
+            Now, there are more than 800 physicians and allied healthcare
+            professionals as members, and the membership is growing. It is a
+            501(c)(3), IRS tax-exempt, charitable organization.
           </p>
-          <p className="text-base font-bold italic">
-            – Team ATMA California Chapter
+          <p>
+            We, as the California chapter of ATMA, are privileged and proud to
+            take ATMA to the next level this year with our novice attempt at an
+            annual convention.
+          </p>
+          <p>
+            We invite you all to join us in this effort — to make the function a
+            great success and take the organization forward to yet another
+            level.
           </p>
         </div>
       </div>
