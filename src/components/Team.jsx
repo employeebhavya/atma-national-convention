@@ -14,6 +14,21 @@ function Team() {
           <div className="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-4">
             <div className="flex flex-col gap-2">
               <Image
+                src="/president.jpg"
+                alt="Dr. Geetha Sivasubramaniam, MD"
+                width={372}
+                height={395}
+                className="object-cover"
+                loading="lazy"
+                quality={100}
+              />
+              <h3 className="text-lg font-semibold">Dr. Rajammal Jayakumar</h3>
+              <p className="text-sm text-gray-600">
+                National President/National Convention Chair
+              </p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Image
                 src="/team/1.png"
                 alt="Dr. Geetha Sivasubramaniam, MD"
                 width={372}
@@ -26,8 +41,9 @@ function Team() {
                 Dr. Rajarathinam Subramaniam
               </h3>
               <p className="text-sm text-gray-600">
-                National Convention Co-Chair Governor, California State and West
-                Coast Chapter
+                National Convention Co-Chair Governor, California State
+                <br />
+                and West Coast Chapter
               </p>
             </div>
             <div className="flex flex-col gap-2">
@@ -44,7 +60,10 @@ function Team() {
                 Dr. Thillakarasi Kannappan,
                 <br /> MD Gynecologist
               </h3>
-              <p className="text-sm text-gray-600">Deputy Governor</p>
+              <p className="text-sm text-gray-600">
+                Deputy Governor - California State and <br />
+                West Coast Chapter
+              </p>
             </div>
             <div className="flex flex-col gap-2">
               <Image
@@ -65,19 +84,6 @@ function Team() {
             </div>
             <div className="flex flex-col gap-2">
               <Image
-                src="/team/3.png"
-                alt="Dr. Geetha Sivasubramaniam, MD"
-                width={372}
-                height={395}
-                className="object-cover"
-                loading="lazy"
-                quality={100}
-              />
-              <h3 className="text-lg font-semibold">Mr. Prabu, PRO</h3>
-              <p className="text-sm text-gray-600">ATMA. California State</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <Image
                 src="/team/5.png"
                 alt="Dr. Anandhi Narasimhan, MD"
                 width={372}
@@ -92,6 +98,19 @@ function Team() {
               <p className="text-sm text-gray-600">
                 Culture and Entertainment Secretary ATMA California
               </p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Image
+                src="/team/3.png"
+                alt="Dr. Geetha Sivasubramaniam, MD"
+                width={372}
+                height={395}
+                className="object-cover"
+                loading="lazy"
+                quality={100}
+              />
+              <h3 className="text-lg font-semibold">Mr. Prabu, PRO</h3>
+              <p className="text-sm text-gray-600">ATMA. California State</p>
             </div>
           </div>
         </div>

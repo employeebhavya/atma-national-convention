@@ -34,9 +34,9 @@ function Accommodation() {
               "https://www.hilton.com/en/hotels/fatccdt-doubletree-fresno-convention-center/?msockid=0cdde5f7717369d014b7f3fc708168a9"
             }
             target="_blank"
-            className="text-[#dc1d46]"
+            className="text-[#dc1d46] text-xl font-semibold hover:text-gray-800"
           >
-            {`Book your room here >`}
+            {`Click here for Hotel Booking >`}
           </Link>
           <p className="mt-2">
             Please book directly with the hotel at your convenience. Rooms are

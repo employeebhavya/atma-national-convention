@@ -24,7 +24,7 @@ export default function Home() {
       <Accommodation />
       <YosemiteNational />
       <WhyAttend />
-      <President />
+      {/* <President /> */}
       <Team />
       <TravelAndShuttle />
     </div>

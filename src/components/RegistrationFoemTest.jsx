@@ -60,7 +60,7 @@ export default function RegistrationForm() {
 
   const registrationOptions = [
     {
-      label: "Platinum Donor",
+      label: "Platinum Sponsors",
       value: "platinum_family",
       amount: 1950,
       description: [
@@ -73,7 +73,7 @@ export default function RegistrationForm() {
       buttonText: "Select Platinum",
     },
     {
-      label: "Gold Donor",
+      label: "Gold Sponsors",
       value: "gold_couple",
       amount: 1450,
       description: [
@@ -85,7 +85,7 @@ export default function RegistrationForm() {
       buttonText: "Select Gold",
     },
     {
-      label: "Silver Donor",
+      label: "Silver Sponsors",
       value: "silver",
       options: [
         {
