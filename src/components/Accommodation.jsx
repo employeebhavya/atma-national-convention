@@ -29,15 +29,35 @@ function Accommodation() {
           <p>
             <strong>Booking Deadline:</strong> July 31
           </p>
-          <Link
-            href={
-              "https://www.hilton.com/en/hotels/fatccdt-doubletree-fresno-convention-center/?msockid=0cdde5f7717369d014b7f3fc708168a9"
-            }
-            target="_blank"
-            className="text-[#dc1d46] text-xl font-semibold hover:text-gray-800"
-          >
-            {`Click here for Hotel Booking >`}
-          </Link>
+          <p className="flex items-center gap-4">
+            For Hotel Bookings:
+            <Link
+              href={
+                "https://www.hilton.com/en/hotels/fatccdt-doubletree-fresno-convention-center/?msockid=0cdde5f7717369d014b7f3fc708168a9"
+              }
+              target="_blank"
+              className="bg-[#dc1d46] text-base text-white px-6 py-1.5 rounded-full font-semibold hover:bg-gray-800 transition-all duration-300 cursor-pointer flex items-center justify-center"
+            >
+              Book Now
+              <span className="ml-2">
+                <svg
+                  width={18}
+                  height={18}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 18L15 12L9 6"
+                    stroke={"white"}
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </Link>
+          </p>
           <p className="mt-2">
             Please book directly with the hotel at your convenience. Rooms are
             limited—early booking is recommended!
