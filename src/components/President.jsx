@@ -26,7 +26,7 @@ function President() {
           <h4 className="text-lg text-black relative ml-3 before:absolute before:content-[''] before:w-[2px] before:h-[80%] before:top-[5px] before:-left-2 before:bg-[#dc1d46]">
             Dr. Rajammal Jayakumar
             <br></br>
-            President of ATMA
+            National President/National Convention Chair
           </h4>
           <p className="text-base text-gray-900">
             As you all know all our members are doing a lot of charitable works.

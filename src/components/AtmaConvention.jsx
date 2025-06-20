@@ -8,7 +8,7 @@ const atmaList = [
     desc: `Connect with like-minded professionals across specialties.`,
   },
   {
-    img: "/images/cultural.webp",
+    img: "/images/cultural.png",
     title: "Cultural Celebration",
     desc: `Indulge in South Indian flavors and fusion cuisine.`,
   },

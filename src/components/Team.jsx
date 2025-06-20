@@ -3,7 +3,7 @@ import React from "react";
 
 function Team() {
   return (
-    <section className="relative mb-14">
+    <section className="relative my-14">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4">
           <div className="col-span-2">
@@ -26,7 +26,8 @@ function Team() {
                 Dr. Rajarathinam Subramaniam
               </h3>
               <p className="text-sm text-gray-600">
-                National Convention Chair, ATMA 2025
+                National Convention Co-Chair Governor, California State and West
+                Coast Chapter
               </p>
             </div>
             <div className="flex flex-col gap-2">
@@ -47,19 +48,6 @@ function Team() {
             </div>
             <div className="flex flex-col gap-2">
               <Image
-                src="/team/3.png"
-                alt="Dr. Geetha Sivasubramaniam, MD"
-                width={372}
-                height={395}
-                className="object-cover"
-                loading="lazy"
-                quality={100}
-              />
-              <h3 className="text-lg font-semibold">Mr. Prabu, PRO</h3>
-              <p className="text-sm text-gray-600">ATMA. California State</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <Image
                 src="/team/4.png"
                 alt="Dr. Geetha Sivasubramaniam, MD"
                 width={372}
@@ -74,6 +62,19 @@ function Team() {
               <p className="text-sm text-gray-600">
                 Secretary, ATMA California State
               </p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Image
+                src="/team/3.png"
+                alt="Dr. Geetha Sivasubramaniam, MD"
+                width={372}
+                height={395}
+                className="object-cover"
+                loading="lazy"
+                quality={100}
+              />
+              <h3 className="text-lg font-semibold">Mr. Prabu, PRO</h3>
+              <p className="text-sm text-gray-600">ATMA. California State</p>
             </div>
             <div className="flex flex-col gap-2">
               <Image

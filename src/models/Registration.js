@@ -9,7 +9,6 @@ const registrationSchema = new mongoose.Schema({
   city: { type: String, required: true },
   state: { type: String, required: true },
   zip: { type: String, required: true },
-  isMember: { type: String, required: true, enum: ["yes", "no"] },
   medicalSchool: { type: String, required: true },
   specialty: { type: String, required: true },
   spouseName: { type: String },
