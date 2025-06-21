@@ -29,14 +29,14 @@ function Accommodation() {
           <p>
             <strong>Booking Deadline:</strong> July 31
           </p>
-          <p className="flex items-center gap-4">
+          <p className="flex items-center gap-4 font-bold">
             For Hotel Bookings:
             <Link
               href={
                 "https://www.hilton.com/en/hotels/fatccdt-doubletree-fresno-convention-center/?msockid=0cdde5f7717369d014b7f3fc708168a9"
               }
               target="_blank"
-              className="bg-[#dc1d46] text-base text-white px-6 py-1.5 rounded-full font-semibold hover:bg-gray-800 transition-all duration-300 cursor-pointer flex items-center justify-center"
+              className="bg-[#dc1d46] text-base text-white px-6 py-1.5 rounded-full font-bold hover:bg-gray-800 transition-all duration-300 cursor-pointer flex items-center justify-center"
             >
               Book Now
               <span className="ml-2">

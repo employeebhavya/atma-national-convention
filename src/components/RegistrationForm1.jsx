@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+// Remove PayPal import and add any necessary utilities
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function RegistrationForm() {
+export default function RegistrationForm1() {
+  // Existing form state
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -25,13 +27,7 @@ export default function RegistrationForm() {
     agreeTerms: false,
   });
 
-  const updateMealQuantity = (key, value) => {
-    setFormData((prev) => ({
-      ...prev,
-      [key]: Math.max(0, value),
-    }));
-  };
-
+  // Existing state variables
   const [quantities, setQuantities] = useState({
     specialGuest: 0,
     familyAdult: 0,
@@ -40,75 +36,22 @@ export default function RegistrationForm() {
     yosemiteGuest: 0,
   });
 
-  // Remove PayPal-specific states and add SwirePay states
+  // Add Swirepay specific states
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [formValid, setFormValid] = useState(false);
   const [showPaymentOptions, setShowPaymentOptions] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
-  const [cardDetails, setCardDetails] = useState({
-    number: "",
-    cvv: "",
-    expiryMonth: "",
-    expiryYear: "",
-    name: "",
-  });
-  const [paymentProcessing, setPaymentProcessing] = useState(false);
-  const [paymentError, setPaymentError] = useState("");
-  const usStates = [
-    { name: "Alabama", abbreviation: "AL" },
-    { name: "Alaska", abbreviation: "AK" },
-    { name: "Arizona", abbreviation: "AZ" },
-    { name: "Arkansas", abbreviation: "AR" },
-    { name: "California", abbreviation: "CA" },
-    { name: "Colorado", abbreviation: "CO" },
-    { name: "Connecticut", abbreviation: "CT" },
-    { name: "Delaware", abbreviation: "DE" },
-    { name: "Florida", abbreviation: "FL" },
-    { name: "Georgia", abbreviation: "GA" },
-    { name: "Hawaii", abbreviation: "HI" },
-    { name: "Idaho", abbreviation: "ID" },
-    { name: "Illinois", abbreviation: "IL" },
-    { name: "Indiana", abbreviation: "IN" },
-    { name: "Iowa", abbreviation: "IA" },
-    { name: "Kansas", abbreviation: "KS" },
-    { name: "Kentucky", abbreviation: "KY" },
-    { name: "Louisiana", abbreviation: "LA" },
-    { name: "Maine", abbreviation: "ME" },
-    { name: "Maryland", abbreviation: "MD" },
-    { name: "Massachusetts", abbreviation: "MA" },
-    { name: "Michigan", abbreviation: "MI" },
-    { name: "Minnesota", abbreviation: "MN" },
-    { name: "Mississippi", abbreviation: "MS" },
-    { name: "Missouri", abbreviation: "MO" },
-    { name: "Montana", abbreviation: "MT" },
-    { name: "Nebraska", abbreviation: "NE" },
-    { name: "Nevada", abbreviation: "NV" },
-    { name: "New Hampshire", abbreviation: "NH" },
-    { name: "New Jersey", abbreviation: "NJ" },
-    { name: "New Mexico", abbreviation: "NM" },
-    { name: "New York", abbreviation: "NY" },
-    { name: "North Carolina", abbreviation: "NC" },
-    { name: "North Dakota", abbreviation: "ND" },
-    { name: "Ohio", abbreviation: "OH" },
-    { name: "Oklahoma", abbreviation: "OK" },
-    { name: "Oregon", abbreviation: "OR" },
-    { name: "Pennsylvania", abbreviation: "PA" },
-    { name: "Rhode Island", abbreviation: "RI" },
-    { name: "South Carolina", abbreviation: "SC" },
-    { name: "South Dakota", abbreviation: "SD" },
-    { name: "Tennessee", abbreviation: "TN" },
-    { name: "Texas", abbreviation: "TX" },
-    { name: "Utah", abbreviation: "UT" },
-    { name: "Vermont", abbreviation: "VT" },
-    { name: "Virginia", abbreviation: "VA" },
-    { name: "Washington", abbreviation: "WA" },
-    { name: "West Virginia", abbreviation: "WV" },
-    { name: "Wisconsin", abbreviation: "WI" },
-    { name: "Wyoming", abbreviation: "WY" },
-  ];
+  const [checkoutPageId, setCheckoutPageId] = useState(null);
+  const [paymentLoading, setPaymentLoading] = useState(false);
 
   const router = useRouter();
   const successMessageRef = useRef(null);
+
+  // Swirepay configuration
+  const SWIREPAY_PUBLIC_KEY =
+    process.env.NEXT_PUBLIC_SWIREPAY_PUBLIC_KEY ||
+    "pk_test_5CiWc6P5D92bGdj9x6L4FPH67aUMOG0m"; // This is the test key from the documentation
+  const SWIREPAY_API_URL = "https://api.swirepay.com/v1";
 
   const registrationOptions = [
     {
@@ -186,8 +129,7 @@ export default function RegistrationForm() {
     {
       label: "Yosemite National Park Tour",
       value: "yosemite_trip",
-      perPerson: 0.1,
-      // perPerson: 100,
+      perPerson: 100,
       description: [
         "Includes transport + entry",
         "A one-day event on 23 August 2025",
@@ -259,7 +201,7 @@ export default function RegistrationForm() {
           }));
           break;
         case "yosemiteGuest":
-          amount = newValue * 1;
+          amount = newValue * 100;
           label = `Yosemite Trip (${newValue} person${
             newValue !== 1 ? "s" : ""
           })`;
@@ -349,6 +291,130 @@ export default function RegistrationForm() {
     }));
   };
 
+  // Function to create a Swirepay checkout page
+  const createCheckoutPage = async () => {
+    try {
+      setPaymentLoading(true);
+
+      // Store registration data in localStorage for later retrieval
+      localStorage.setItem(
+        "pendingRegistration",
+        JSON.stringify({
+          formData,
+          timestamp: new Date().toISOString(),
+        })
+      );
+
+      // API call to create a checkout page
+      const response = await fetch(`${SWIREPAY_API_URL}/checkout-page`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": SWIREPAY_PUBLIC_KEY,
+        },
+        body: JSON.stringify({
+          amount: parseInt(formData.amount) * 100, // Convert to cents
+          currencyCode: "USD",
+          sessionTimeout: 900, // 15 minutes
+          paymentMethodType: ["CARD"],
+          redirectUri: `${window.location.origin}/registration-callback`,
+          serverCallbackUrl: `${window.location.origin}/api/swirepay-callback`,
+          meta: {
+            registrationType: formData.registrationType,
+            registrationLabel: formData.registrationLabel,
+            customerName: `${formData.firstName} ${formData.lastName}`,
+            customerEmail: formData.email,
+          },
+        }),
+      });
+
+      const data = await response.json();
+      console.error("Swirepay API response:", data);
+
+      if (data.status === "SUCCESS" && data.entity) {
+        const { gid, link } = data.entity;
+        setCheckoutPageId(gid);
+
+        // Store checkout page ID in localStorage
+        localStorage.setItem("checkoutPageId", gid);
+
+        // Redirect to Swirepay checkout page
+        window.location.href = link;
+      } else {
+        console.error("Payment page creation failed:", data);
+        alert(
+          `Failed to create payment page: ${data.message || "Unknown error"}`
+        );
+        setPaymentLoading(false);
+      }
+    } catch (error) {
+      console.error("Payment error:", error);
+      alert(`There was an error processing your payment: ${error.message}`);
+      setPaymentLoading(false);
+    }
+  };
+
+  // Function to save registration data
+  const saveRegistration = async (
+    checkoutPageId,
+    transactionId,
+    status = "pending"
+  ) => {
+    try {
+      const response = await fetch("/api/registrations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          checkoutPageId: checkoutPageId,
+          transactionId: transactionId || `${checkoutPageId}`,
+          paymentStatus: status,
+          registrationDate: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Registration save error details:", errorData);
+        throw new Error(
+          `Failed to save registration: ${errorData.error || "Unknown error"}`
+        );
+      }
+
+      return true;
+    } catch (error) {
+      console.error("Registration save failed:", error);
+      return false;
+    }
+  };
+
+  // Function to verify payment (after redirect)
+  const verifyPayment = async (checkoutPageId) => {
+    // This would be implemented on your callback page
+    // Code shown here for reference
+    try {
+      const response = await fetch(`/api/verify-payment?id=${checkoutPageId}`, {
+        method: "GET",
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setPaymentSuccess(true);
+      } else {
+        alert("Payment verification failed. Please contact support.");
+      }
+    } catch (error) {
+      console.error("Payment verification error:", error);
+      alert(
+        "There was an error verifying your payment. Please contact support."
+      );
+    }
+  };
+
+  // Replace handleProceedToPayment with new function
   const handleProceedToPayment = () => {
     if (!formValid) {
       alert("Please fill all required fields before proceeding to payment");
@@ -357,196 +423,85 @@ export default function RegistrationForm() {
     setShowReviewModal(true);
   };
 
-  const handleCardChange = (e) => {
-    const { name, value } = e.target;
-    setCardDetails((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  // Function to validate payment data
+  const validatePaymentData = () => {
+    const amount = parseInt(formData.amount);
+    if (!amount || isNaN(amount) || amount <= 0) {
+      alert("Please select a valid registration option with a payment amount.");
+      return false;
+    }
+
+    // Validate that amount is not too small (Swirepay may have minimum amount requirements)
+    if (amount < 1) {
+      alert(
+        "Payment amount is too small. Please select a valid registration option."
+      );
+      return false;
+    }
+
+    return true;
   };
 
-  const processSwirePayPayment = async () => {
-    setPaymentProcessing(true);
-    setPaymentError("");
+  // Function to initiate payment after review
+  const initiatePayment = async () => {
+    setShowReviewModal(false);
+
+    if (!validatePaymentData()) {
+      return;
+    }
 
     try {
-      // Helper function to handle API responses
-      const handleResponse = async (response) => {
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          const text = await response.text();
-          throw new Error(`Invalid response: ${text}`);
-        }
-        return response.json();
-      };
-
-      // Step 1: Tokenization
-      const tokenResponse = await fetch("/api/swirepay/tokenize", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: "CARD",
-          card: {
-            number: cardDetails.number.replace(/\s/g, ""),
-            cvv: cardDetails.cvv,
-            expiryMonth: parseInt(cardDetails.expiryMonth),
-            expiryYear: parseInt(cardDetails.expiryYear),
-            name: cardDetails.name,
-          },
-          postalCode: formData.zip,
-          paymentMethodBillingAddress: {
-            street: formData.address,
-            city: formData.city,
-            state: formData.state,
-            countryCode: "US",
-          },
-          countryCode: "US",
-        }),
-      });
-
-      if (!tokenResponse.ok) {
-        throw new Error(`Tokenization failed: ${tokenResponse.status}`);
-      }
-
-      const tokenData = await handleResponse(tokenResponse);
-      if (!tokenData.entity?.gid) {
-        throw new Error("Tokenization failed - no token received");
-      }
-      const tokenGid = tokenData.entity.gid;
-
-      // Step 2: Create Payment Method
-      const paymentMethodResponse = await fetch(
-        "/api/swirepay/payment-method",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            token: tokenGid,
-            type: "CARD",
-            card: {
-              cvv: cardDetails.cvv,
-              expiryMonth: parseInt(cardDetails.expiryMonth),
-              expiryYear: parseInt(cardDetails.expiryYear),
-              name: cardDetails.name,
-              number: cardDetails.number.replace(/\s/g, ""),
-            },
-            paymentMethodBillingAddress: {
-              street: formData.address,
-              city: formData.city,
-              state: formData.state,
-              countryCode: "US",
-            },
-            postalCode: formData.zip,
-          }),
-        }
-      );
-
-      if (!paymentMethodResponse.ok) {
-        throw new Error(
-          `Payment method creation failed: ${paymentMethodResponse.status}`
-        );
-      }
-
-      const paymentMethodData = await handleResponse(paymentMethodResponse);
-      if (!paymentMethodData.entity?.gid) {
-        throw new Error(
-          "Payment method creation failed - no payment method received"
-        );
-      }
-      const paymentMethodGid = paymentMethodData.entity.gid;
-
-      // Step 3: Create Payment Session
-      const paymentSessionResponse = await fetch(
-        "/api/swirepay/payment-session",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            receiptEmail: formData.email,
-            currencyCode: "USD",
-            description: `ATMA Registration: ${formData.registrationLabel}`,
-            statementDescriptor: "ATMA",
-            paymentMethodType: ["CARD"],
-            confirmMethod: "AUTOMATIC",
-            captureMethod: "AUTOMATIC",
-            amount: Math.round(parseFloat(formData.amount) * 100),
-            paymentMethodGid: paymentMethodGid,
-          }),
-        }
-      );
-
-      if (!paymentSessionResponse.ok) {
-        throw new Error(
-          `Payment session creation failed: ${paymentSessionResponse.status}`
-        );
-      }
-
-      const sessionData = await handleResponse(paymentSessionResponse);
-
-      if (sessionData.status !== "SUCCESS") {
-        throw new Error(sessionData.message || "Payment failed");
-      }
-
-      // Save registration to database
-      const dbResponse = await fetch("/api/registrations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          transactionId: sessionData.entity?.gid || "N/A",
-          paymentStatus: "completed",
-          registrationDate: new Date().toISOString(),
-        }),
-      });
-
-      if (!dbResponse.ok) {
-        throw new Error("Failed to save registration");
-      }
-
-      setPaymentSuccess(true);
-      setShowPaymentOptions(false);
+      await createCheckoutPage();
     } catch (error) {
-      console.error("Payment processing failed:", error);
-      setPaymentError(
-        error.message ||
-          "There was an error processing your payment. Please try again."
-      );
-    } finally {
-      setPaymentProcessing(false);
+      console.error("Payment initiation failed:", error);
+      alert("There was an error initiating payment. Please try again.");
+      setPaymentLoading(false);
     }
   };
 
-  if (paymentSuccess) {
-    return (
-      <div
-        ref={successMessageRef}
-        className="max-w-md mx-auto mt-10 p-8 bg-green-50 rounded-lg shadow-md text-center"
-      >
-        <h2 className="text-3xl font-bold text-black mb-4">
-          Registration Successful!
-        </h2>
-        <p className="text-black mb-4">
-          Thank you for registering for ATMA. A confirmation has been sent to
-          your email.
-        </p>
-        <div className="mt-6">
-          <Link href="/">
-            <button className="px-4 py-2 bg-[#dc1d46] text-white hover:bg-[black] cursor-pointer">
-              Return to ATMA Website
-            </button>
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  // Update the debugPaymentCreation function
+  const debugPaymentCreation = () => {
+    const testPayload = {
+      amount: parseInt(formData.amount) * 100,
+      currencyCode: "USD",
+      sessionTimeout: 900,
+      paymentMethodType: ["CARD"], // Remove ACH, only use CARD
+      redirectUri: `${window.location.origin}/registration-callback`,
+      meta: {
+        registrationType: formData.registrationType,
+        customerName: `${formData.firstName} ${formData.lastName}`,
+      },
+    };
+
+    // console.log("Testing with simplified payload:", testPayload);
+
+    fetch(`${SWIREPAY_API_URL}/checkout-page`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": SWIREPAY_PUBLIC_KEY,
+      },
+      body: JSON.stringify(testPayload),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("Debug API response:", data);
+        if (data.status !== "SUCCESS") {
+          console.error("API Error details:", data);
+        }
+      })
+      .catch((error) => {
+        console.error("Debug API call failed:", error);
+      });
+  };
+
+  const updateMealQuantity = (type, value) => {
+    const newValue = Math.max(0, value);
+    setFormData((prev) => ({
+      ...prev,
+      [type]: newValue,
+    }));
+  };
 
   return (
     <section className="relative my-14" id="form">
@@ -643,7 +598,7 @@ export default function RegistrationForm() {
                 />
               </div>
 
-              {/* <div>
+              <div>
                 <label className="block text-base font-medium text-gray-600 mb-1">
                   State<span className="text-red-500">*</span>
                 </label>
@@ -655,26 +610,6 @@ export default function RegistrationForm() {
                   className="w-full border-b border-gray-400"
                   required
                 />
-              </div> */}
-
-              <div>
-                <label className="block text-base font-medium text-gray-600 mb-1">
-                  State<span className="text-red-500">*</span>
-                </label>
-                <select
-                  name="state"
-                  value={formData.state}
-                  onChange={handleChange}
-                  className="w-full border-b border-gray-400"
-                  required
-                >
-                  <option value="">Select State</option>
-                  {usStates.map((state) => (
-                    <option key={state.abbreviation} value={state.abbreviation}>
-                      {state.name} ({state.abbreviation})
-                    </option>
-                  ))}
-                </select>
               </div>
 
               <div>
@@ -828,7 +763,9 @@ export default function RegistrationForm() {
 
           {/* Registration Type Cards */}
           <div className="space-y-6">
-            <h2 className="text-xl font-bold text-black mb-4">Registration</h2>
+            <h2 className="text-xl font-bold text-black mb-4">
+              Registration<span className="text-red-500">*</span>
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 [1300px]:grid-cols-5 gap-4">
               {registrationOptions.map((option) => (
                 <div
@@ -1003,9 +940,9 @@ export default function RegistrationForm() {
                         <p className="text-lg font-bold text-[#dc1d46]">
                           ${option.amount.toLocaleString()}
                           {option.label === "Platinum Donor" &&
-                            " (Physician & Spouse)"}
+                            " (Physician Family)"}
                           {option.label === "Gold Donor" &&
-                            " (Physician & Spouse)"}
+                            " (Physician + Spouse)"}
                         </p>
                         <button
                           type="button"
@@ -1070,19 +1007,6 @@ export default function RegistrationForm() {
         </form>
       </div>
 
-      {paymentError && (
-        <div className="mt-4 p-4 bg-red-50 text-red-700 rounded-lg">
-          <p className="font-medium">Payment Error:</p>
-          <p>{paymentError}</p>
-          <button
-            onClick={() => setPaymentError("")}
-            className="mt-2 text-sm underline text-red-800 hover:text-red-900"
-          >
-            Try again
-          </button>
-        </div>
-      )}
-
       {/* Review Modal */}
       {showReviewModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -1114,10 +1038,7 @@ export default function RegistrationForm() {
                 Cancel
               </button>
               <button
-                onClick={() => {
-                  setShowReviewModal(false);
-                  setShowPaymentOptions(true);
-                }}
+                onClick={initiatePayment}
                 className="px-4 py-2 bg-[#dc1d46] text-white hover:bg-black flex-1"
               >
                 Proceed to Payment
@@ -1127,123 +1048,17 @@ export default function RegistrationForm() {
         </div>
       )}
 
-      {/* Payment Options */}
-      {showPaymentOptions && (
+      {/* Payment Loading */}
+      {paymentLoading && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white p-6 rounded-lg max-w-md w-full">
-            <h2 className="text-xl font-bold mb-4">Payment Information</h2>
-
-            <div className="mb-4 p-4 bg-gray-50">
-              <h3 className="text-lg font-medium">Registration Fee</h3>
-              <p className="text-xl font-bold">
-                ${parseInt(formData.amount).toLocaleString()}
-              </p>
+          <div className="bg-white p-6 rounded-lg max-w-md w-full text-center">
+            <div className="mb-4">
+              <div className="w-12 h-12 border-4 border-t-[#dc1d46] border-gray-200 rounded-full animate-spin mx-auto"></div>
             </div>
-
-            {paymentError && (
-              <div className="mb-4 p-3 bg-red-50 text-red-700 rounded">
-                {paymentError}
-              </div>
-            )}
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Card Number
-                </label>
-                <input
-                  type="text"
-                  name="number"
-                  value={cardDetails.number}
-                  onChange={handleCardChange}
-                  placeholder="4242 4242 4242 4242"
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Expiration Date
-                  </label>
-                  <div className="flex space-x-2">
-                    <input
-                      type="text"
-                      name="expiryMonth"
-                      value={cardDetails.expiryMonth}
-                      onChange={handleCardChange}
-                      placeholder="MM"
-                      maxLength="2"
-                      className="w-1/2 p-2 border border-gray-300 rounded"
-                    />
-                    <input
-                      type="text"
-                      name="expiryYear"
-                      value={cardDetails.expiryYear}
-                      onChange={handleCardChange}
-                      placeholder="YYYY"
-                      maxLength="4"
-                      className="w-1/2 p-2 border border-gray-300 rounded"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    CVV
-                  </label>
-                  <input
-                    type="text"
-                    name="cvv"
-                    value={cardDetails.cvv}
-                    onChange={handleCardChange}
-                    placeholder="123"
-                    maxLength="4"
-                    className="w-full p-2 border border-gray-300 rounded"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Name on Card
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={cardDetails.name}
-                  onChange={handleCardChange}
-                  placeholder="John Smith"
-                  className="w-full p-2 border border-gray-300 rounded"
-                />
-              </div>
-            </div>
-
-            <div className="mt-6 flex space-x-4">
-              <button
-                onClick={() => setShowPaymentOptions(false)}
-                className="px-4 py-2 border border-gray-300 text-black hover:bg-gray-100 flex-1"
-                disabled={paymentProcessing}
-              >
-                Cancel
-              </button>
-              <button
-                onClick={processSwirePayPayment}
-                disabled={
-                  paymentProcessing ||
-                  !cardDetails.number ||
-                  !cardDetails.cvv ||
-                  !cardDetails.expiryMonth ||
-                  !cardDetails.expiryYear ||
-                  !cardDetails.name
-                }
-                className={`px-4 py-2 bg-[#dc1d46] text-white hover:bg-black flex-1 ${
-                  paymentProcessing ? "opacity-70 cursor-not-allowed" : ""
-                }`}
-              >
-                {paymentProcessing ? "Processing..." : "Pay Now"}
-              </button>
-            </div>
+            <p className="text-lg">Processing your payment...</p>
+            <p className="text-sm text-gray-500 mt-2">
+              Please do not close this window.
+            </p>
           </div>
         </div>
       )}

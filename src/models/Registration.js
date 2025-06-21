@@ -18,8 +18,20 @@ const registrationSchema = new mongoose.Schema({
   registrationType: { type: String, required: true },
   registrationLabel: { type: String, required: true },
   amount: { type: Number, required: true },
-  transactionId: { type: String, required: true },
-  paymentStatus: { type: String, required: true, default: "pending" },
+  // transactionId: { type: String, required: true },
+  transactionId: {
+    type: String,
+    required: true,
+    default: function () {
+      return `${this._id}`;
+    },
+  },
+  checkoutPageId: { type: String },
+  paymentStatus: {
+    type: String,
+    enum: ["pending", "completed", "failed"],
+    default: "pending",
+  },
   registrationDate: { type: Date, required: true, default: Date.now },
 });
 

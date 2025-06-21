@@ -6,10 +6,10 @@ function Hero() {
     <section className="relative hero">
       <div className="container relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4">
         <div className="flex flex-col gap-2 justify-center pt-8 lg:pt-0">
-          <h1 className="text-2xl md:text-[47px]">
+          <h1 className="text-xl md:text-[37px]">
             Welcome to the{" "}
             <span className="text-[#cf1941]">
-              16th ATMA National Convention - 2025!
+              ATMA August 2025 National Convention Registration
             </span>
           </h1>
           <hr className="text-[#CCCCCC] h-1" />
@@ -47,7 +47,7 @@ function Hero() {
               </div>
             </div>
           </div>
-          <h3 className="text-2xl sm:text-3xl text-black mt-2">
+          <h3 className="text-xl sm:text-3xl text-black mt-2">
             Fresno Masonic Hall, California
           </h3>
         </div>

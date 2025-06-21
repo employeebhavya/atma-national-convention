@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import President from "@/components/President";
 import RegistrationFoemTest from "@/components/RegistrationFoemTest";
 import RegistrationForm from "@/components/RegistrationForm";
+import RegistrationForm1 from "@/components/RegistrationForm1";
 import SpecialHighlights from "@/components/SpecialHighlights";
 import Team from "@/components/Team";
 import TravelAndShuttle from "@/components/TravelAndShuttle";
@@ -20,7 +21,8 @@ export default function Home() {
       <AtmaConvention />
       <SpecialHighlights />
       {/* <RegistrationForm /> */}
-      <RegistrationFoemTest />
+      {/* <RegistrationFoemTest /> */}
+      <RegistrationForm1 />
       <Accommodation />
       <YosemiteNational />
       <WhyAttend />
