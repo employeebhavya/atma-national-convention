@@ -1,9 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function RegistrationCallback() {
+// Loading component for Suspense fallback
+function LoadingFallback() {
+  return (
+    <div className="max-w-md mx-auto my-10 p-8 rounded-lg shadow-md text-center">
+      <h2 className="text-2xl font-bold text-black mb-4">Loading...</h2>
+      <div className="w-12 h-12 border-4 border-t-[#dc1d46] border-gray-200 rounded-full animate-spin mx-auto"></div>
+    </div>
+  );
+}
+
+// Component that uses useSearchParams
+function RegistrationCallbackContent() {
   const [status, setStatus] = useState("loading");
   const [paymentDetails, setPaymentDetails] = useState(null);
   const searchParams = useSearchParams();
@@ -83,7 +94,7 @@ export default function RegistrationCallback() {
 
   if (status === "loading") {
     return (
-      <div className="max-w-md mx-auto mt-10 p-8 rounded-lg shadow-md text-center">
+      <div className="max-w-md mx-auto my-10 p-8 rounded-lg shadow-md text-center">
         <h2 className="text-2xl font-bold text-black mb-4">
           Verifying Registration...
         </h2>
@@ -152,5 +163,14 @@ export default function RegistrationCallback() {
         </Link>
       </div>
     </div>
+  );
+}
+
+// Main export component with Suspense boundary
+export default function RegistrationCallback() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <RegistrationCallbackContent />
+    </Suspense>
   );
 }
