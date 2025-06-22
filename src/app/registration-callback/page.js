@@ -64,6 +64,12 @@ function RegistrationCallbackContent() {
                 verifyData.paymentDetails.receiptNumber || checkoutPageId,
               paymentStatus: "completed",
               registrationDate: new Date().toISOString(),
+              // Make sure to pass along the discount information from localStorage
+              discountApplied: formData.discountApplied || 0,
+              originalAmount: formData.originalAmount || formData.amount,
+              paidAmount: formData.paidAmount || formData.amount,
+              // Use the paidAmount as the final amount
+              amount: formData.paidAmount || formData.amount,
             }),
           });
 

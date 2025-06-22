@@ -300,13 +300,27 @@ export default function RegistrationForm1() {
     try {
       setPaymentLoading(true);
 
+      // Check if early bird discount applies
+      const discountApplied = isEarlyBirdActive();
+      const originalAmount = formData.amount;
+      const paidAmount = discountApplied
+        ? calculateDiscountedAmount(originalAmount)
+        : originalAmount;
+
       // Store registration data in localStorage for later retrieval
       localStorage.setItem(
         "pendingRegistration",
         JSON.stringify({
           formData: {
             ...formData,
-            paymentMethod: "swirepay", // Add payment method
+            paymentMethod: "swirepay",
+            discountApplied: discountApplied
+              ? EARLY_BIRD_DISCOUNT_PERCENTAGE
+              : 0,
+            originalAmount: originalAmount,
+            paidAmount: paidAmount,
+            // Override the amount with the discounted amount if early bird is active
+            amount: discountApplied ? paidAmount.toString() : originalAmount,
           },
           timestamp: new Date().toISOString(),
         })
@@ -320,7 +334,10 @@ export default function RegistrationForm1() {
           "x-api-key": SWIREPAY_PUBLIC_KEY,
         },
         body: JSON.stringify({
-          amount: parseInt(formData.amount) * 100, // Convert to cents
+          // Apply early bird discount if applicable
+          amount: discountApplied
+            ? parseInt(paidAmount) * 100 // Convert to cents
+            : parseInt(originalAmount) * 100, // Convert to cents
           currencyCode: "USD",
           sessionTimeout: 900, // 15 minutes
           paymentMethodType: ["CARD"],
@@ -328,10 +345,17 @@ export default function RegistrationForm1() {
           serverCallbackUrl: `${window.location.origin}/api/swirepay-callback`,
           meta: {
             registrationType: formData.registrationType,
-            registrationLabel: formData.registrationLabel,
+            registrationLabel:
+              formData.registrationLabel +
+              (discountApplied ? " (Early Bird)" : ""),
             customerName: `${formData.firstName} ${formData.lastName}`,
             customerEmail: formData.email,
             paymentMethod: "swirepay",
+            originalAmount: originalAmount,
+            discountApplied: discountApplied
+              ? EARLY_BIRD_DISCOUNT_PERCENTAGE
+              : 0,
+            paidAmount: paidAmount,
           },
         }),
       });
@@ -369,6 +393,13 @@ export default function RegistrationForm1() {
     status = "pending"
   ) => {
     try {
+      // Check if early bird discount applies
+      const discountApplied = isEarlyBirdActive();
+      const originalAmount = formData.amount;
+      const paidAmount = discountApplied
+        ? calculateDiscountedAmount(originalAmount)
+        : originalAmount;
+
       const response = await fetch("/api/registrations", {
         method: "POST",
         headers: {
@@ -380,6 +411,12 @@ export default function RegistrationForm1() {
           transactionId: transactionId || `${checkoutPageId}`,
           paymentStatus: status,
           registrationDate: new Date().toISOString(),
+          // Add discount information
+          discountApplied: discountApplied ? EARLY_BIRD_DISCOUNT_PERCENTAGE : 0,
+          originalAmount: originalAmount,
+          paidAmount: paidAmount,
+          // If early bird is active, override the amount with the discounted amount
+          amount: discountApplied ? paidAmount.toString() : originalAmount,
         }),
       });
 
@@ -528,14 +565,21 @@ export default function RegistrationForm1() {
 
   // Add PayPal functions
   const createOrder = (data, actions) => {
+    // Apply early bird discount if applicable
+    const paymentAmount = isEarlyBirdActive()
+      ? calculateDiscountedAmount(formData.amount).toString()
+      : formData.amount;
+
     return actions.order.create({
       purchase_units: [
         {
           amount: {
-            value: formData.amount,
+            value: paymentAmount,
             currency_code: "USD",
           },
-          description: `ATMA Registration: ${formData.registrationLabel}`,
+          description: `ATMA Registration: ${formData.registrationLabel}${
+            isEarlyBirdActive() ? " (Early Bird)" : ""
+          }`,
         },
       ],
     });
@@ -545,6 +589,13 @@ export default function RegistrationForm1() {
     try {
       setPaymentLoading(true);
       const details = await actions.order.capture();
+
+      // Check if early bird discount was applied
+      const discountApplied = isEarlyBirdActive();
+      const originalAmount = formData.amount;
+      const paidAmount = discountApplied
+        ? calculateDiscountedAmount(originalAmount)
+        : originalAmount;
 
       // Save registration with PayPal transaction details
       const response = await fetch("/api/registrations", {
@@ -558,6 +609,11 @@ export default function RegistrationForm1() {
           paymentMethod: "paypal",
           paymentStatus: "completed",
           registrationDate: new Date().toISOString(),
+          discountApplied: discountApplied ? EARLY_BIRD_DISCOUNT_PERCENTAGE : 0,
+          originalAmount: originalAmount,
+          paidAmount: paidAmount,
+          // Override the amount with the discounted amount if early bird is active
+          amount: discountApplied ? paidAmount.toString() : originalAmount,
         }),
       });
 
@@ -578,6 +634,30 @@ export default function RegistrationForm1() {
     }
   };
 
+  // Add these constants after your state declarations
+
+  // Early bird discount configuration
+  const EARLY_BIRD_DISCOUNT_PERCENTAGE = 10;
+  const EARLY_BIRD_END_DATE = new Date("2025-07-20T23:59:59");
+
+  // Check if early bird discount is active
+  const isEarlyBirdActive = () => {
+    const currentDate = new Date();
+    return currentDate <= EARLY_BIRD_END_DATE;
+  };
+
+  // Calculate discounted amount
+  const calculateDiscountedAmount = (originalAmount) => {
+    if (!isEarlyBirdActive()) return originalAmount;
+
+    const originalValue = parseInt(originalAmount);
+    const discountAmount =
+      (originalValue * EARLY_BIRD_DISCOUNT_PERCENTAGE) / 100;
+    return Math.round(originalValue - discountAmount);
+  };
+
+  // Update the success message display
+
   if (paymentSuccess) {
     return (
       <div
@@ -591,6 +671,14 @@ export default function RegistrationForm1() {
           Thank you for registering for ATMA. A confirmation has been sent to
           your email.
         </p>
+        {isEarlyBirdActive() && (
+          <div className="mb-4 p-3 bg-green-100 rounded-md">
+            <p className="text-green-800">
+              <span className="font-bold">Early Bird Discount:</span> 10% off
+              applied to your registration
+            </p>
+          </div>
+        )}
         <div className="mt-6">
           <Link href="/">
             <button className="px-4 py-2 bg-[#dc1d46] text-white hover:bg-[black] cursor-pointer">
@@ -1115,9 +1203,37 @@ export default function RegistrationForm1() {
             </h2>
             <div className="mb-4 p-4 bg-gray-50">
               <h3 className="text-lg font-medium">Registration Fee</h3>
-              <p className="text-xl font-bold">
-                ${parseInt(formData.amount).toLocaleString()}
-              </p>
+              {isEarlyBirdActive() ? (
+                <div className="space-y-1">
+                  <p className="text-xl font-bold flex items-center">
+                    <span className="line-through text-gray-500 mr-2">
+                      ${parseInt(formData.amount).toLocaleString()}
+                    </span>
+                    $
+                    {calculateDiscountedAmount(
+                      formData.amount
+                    ).toLocaleString()}
+                  </p>
+                  <p className="text-sm text-[#dc1d46] font-medium flex items-center">
+                    <svg
+                      className="h-4 w-4 mr-1"
+                      fill="#dc1d46"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Early Bird Discount (10% off) applied
+                  </p>
+                </div>
+              ) : (
+                <p className="text-xl font-bold">
+                  ${parseInt(formData.amount).toLocaleString()}
+                </p>
+              )}
             </div>
 
             <div className="space-y-4">
@@ -1214,9 +1330,30 @@ export default function RegistrationForm1() {
                 <h3 className="text-lg font-semibold text-black">
                   {formData.registrationLabel}
                 </h3>
-                <p className="text-lg font-bold text-[#dc1d46]">
-                  ${parseInt(formData.amount).toLocaleString()}
-                </p>
+
+                {isEarlyBirdActive() ? (
+                  <div className="space-y-1">
+                    <p className="text-lg font-bold text-[#dc1d46] flex items-center">
+                      <span className="line-through text-gray-500 mr-2">
+                        ${parseInt(formData.amount).toLocaleString()}
+                      </span>
+                      $
+                      {calculateDiscountedAmount(
+                        formData.amount
+                      ).toLocaleString()}
+                      <span className="ml-2 bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded">
+                        10% Early Bird Discount
+                      </span>
+                    </p>
+                    <p className="text-sm text-[#dc1d46]">
+                      Early bird offer valid until July 20, 2025
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-lg font-bold text-[#dc1d46]">
+                    ${parseInt(formData.amount).toLocaleString()}
+                  </p>
+                )}
               </div>
               <div className="border-t border-gray-200 pt-4">
                 <p className="text-gray-700">
