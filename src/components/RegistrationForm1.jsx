@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-// Remove PayPal import and add any necessary utilities
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -43,6 +43,10 @@ export default function RegistrationForm1() {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [checkoutPageId, setCheckoutPageId] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
+
+  // Add to your existing state variables
+  const [paypalReady, setPaypalReady] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null); // "paypal" or "swirepay"
 
   const router = useRouter();
   const successMessageRef = useRef(null);
@@ -300,7 +304,10 @@ export default function RegistrationForm1() {
       localStorage.setItem(
         "pendingRegistration",
         JSON.stringify({
-          formData,
+          formData: {
+            ...formData,
+            paymentMethod: "swirepay", // Add payment method
+          },
           timestamp: new Date().toISOString(),
         })
       );
@@ -324,6 +331,7 @@ export default function RegistrationForm1() {
             registrationLabel: formData.registrationLabel,
             customerName: `${formData.firstName} ${formData.lastName}`,
             customerEmail: formData.email,
+            paymentMethod: "swirepay",
           },
         }),
       });
@@ -414,13 +422,45 @@ export default function RegistrationForm1() {
     }
   };
 
-  // Replace handleProceedToPayment with new function
+  // Replace handleProceedToPayment with this updated version
   const handleProceedToPayment = () => {
     if (!formValid) {
       alert("Please fill all required fields before proceeding to payment");
       return;
     }
     setShowReviewModal(true);
+  };
+
+  // Update the initiatePayment function to show payment options
+  const initiatePayment = () => {
+    setShowReviewModal(false);
+    setShowPaymentOptions(true); // Show payment options instead of directly proceeding
+
+    // Initialize PayPal when showing payment options
+    setPaypalReady(true);
+  };
+
+  // Add a function to handle selecting a payment method
+  const handlePaymentMethodSelect = async (method) => {
+    setSelectedPaymentMethod(method);
+
+    if (method === "swirepay") {
+      // Close payment options modal and proceed with Swirepay
+      setShowPaymentOptions(false);
+
+      if (!validatePaymentData()) {
+        return;
+      }
+
+      try {
+        await createCheckoutPage();
+      } catch (error) {
+        console.error("Payment initiation failed:", error);
+        alert("There was an error initiating payment. Please try again.");
+        setPaymentLoading(false);
+      }
+    }
+    // For PayPal, we leave the modal open with PayPal buttons
   };
 
   // Function to validate payment data
@@ -440,23 +480,6 @@ export default function RegistrationForm1() {
     }
 
     return true;
-  };
-
-  // Function to initiate payment after review
-  const initiatePayment = async () => {
-    setShowReviewModal(false);
-
-    if (!validatePaymentData()) {
-      return;
-    }
-
-    try {
-      await createCheckoutPage();
-    } catch (error) {
-      console.error("Payment initiation failed:", error);
-      alert("There was an error initiating payment. Please try again.");
-      setPaymentLoading(false);
-    }
   };
 
   // Update the debugPaymentCreation function
@@ -502,6 +525,82 @@ export default function RegistrationForm1() {
       [type]: newValue,
     }));
   };
+
+  // Add PayPal functions
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: formData.amount,
+            currency_code: "USD",
+          },
+          description: `ATMA Registration: ${formData.registrationLabel}`,
+        },
+      ],
+    });
+  };
+
+  const onApprove = async (data, actions) => {
+    try {
+      setPaymentLoading(true);
+      const details = await actions.order.capture();
+
+      // Save registration with PayPal transaction details
+      const response = await fetch("/api/registrations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          transactionId: details.id,
+          paymentMethod: "paypal",
+          paymentStatus: "completed",
+          registrationDate: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to process registration");
+      }
+
+      setPaymentSuccess(true);
+      setShowPaymentOptions(false);
+      setPaymentLoading(false);
+    } catch (error) {
+      console.error("Payment processing failed:", error);
+      alert(
+        "There was an error processing your registration. Please try again."
+      );
+      setShowPaymentOptions(false);
+      setPaymentLoading(false);
+    }
+  };
+
+  if (paymentSuccess) {
+    return (
+      <div
+        ref={successMessageRef}
+        className="max-w-md mx-auto mt-10 p-8 bg-green-50 rounded-lg shadow-md text-center"
+      >
+        <h2 className="text-3xl font-bold text-black mb-4">
+          Registration Successful!
+        </h2>
+        <p className="text-black mb-4">
+          Thank you for registering for ATMA. A confirmation has been sent to
+          your email.
+        </p>
+        <div className="mt-6">
+          <Link href="/">
+            <button className="px-4 py-2 bg-[#dc1d46] text-white hover:bg-[black] cursor-pointer">
+              Return to ATMA Website
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section className="relative my-14" id="form">
@@ -1006,6 +1105,102 @@ export default function RegistrationForm1() {
           </div>
         </form>
       </div>
+
+      {/* Payment Options Modal */}
+      {showPaymentOptions && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white p-6 rounded-lg max-w-md w-full">
+            <h2 className="text-2xl font-bold text-black mb-4">
+              Choose Payment Method
+            </h2>
+            <div className="mb-4 p-4 bg-gray-50">
+              <h3 className="text-lg font-medium">Registration Fee</h3>
+              <p className="text-xl font-bold">
+                ${parseInt(formData.amount).toLocaleString()}
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <p className="text-black text-base mb-4">
+                For Direct Bank Transfers contact WhatsApp number{" "}
+                <a
+                  href="https://wa.me/17323546272"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#dc1d46] font-semibold text-lg"
+                >
+                  +1 732-354-6272
+                </a>
+                .
+              </p>
+
+              <div className="space-y-4">
+                <button
+                  onClick={() => handlePaymentMethodSelect("swirepay")}
+                  className={`px-4 py-3 bg-[#dc1d46] border-[#dc1d46] text-white w-full flex items-center justify-center border-1 rounded-md hover:bg-transparent hover:text-black cursor-pointer`}
+                >
+                  <span className="font-medium">Pay with Swirepay</span>
+                  <span className="text-xs ml-2">(Credit/Debit Cards)</span>
+                </button>
+
+                <div
+                  className={`${
+                    selectedPaymentMethod === "paypal"
+                      ? "opacity-100"
+                      : "opacity-90"
+                  }`}
+                >
+                  <button
+                    onClick={() => handlePaymentMethodSelect("paypal")}
+                    className={`px-4 py-3 w-full border-[#dc1d46] border-1 text-base text-black flex items-center justify-center rounded-md mb-4 hover:bg-[#dc1d46] hover:text-white cursor-pointer`}
+                  >
+                    <span className="font-medium">Pay with PayPal</span>
+                  </button>
+
+                  {selectedPaymentMethod === "paypal" && paypalReady && (
+                    <PayPalScriptProvider
+                      options={{
+                        "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+                        currency: "USD",
+                        intent: "capture",
+                      }}
+                    >
+                      <PayPalButtons
+                        style={{
+                          layout: "vertical",
+                          color: "gold",
+                          shape: "rect",
+                          label: "paypal",
+                        }}
+                        createOrder={createOrder}
+                        onApprove={onApprove}
+                        onError={(err) => {
+                          console.error("PayPal Error:", err);
+                          setSelectedPaymentMethod(null);
+                        }}
+                        onCancel={() => {
+                          console.log("Payment cancelled by user");
+                          setSelectedPaymentMethod(null);
+                        }}
+                      />
+                    </PayPalScriptProvider>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                setShowPaymentOptions(false);
+                setSelectedPaymentMethod(null);
+              }}
+              className="mt-6 px-4 py-2 border border-gray-300 text-black hover:bg-[#dc1d46] hover:text-white cursor-pointer w-full"
+            >
+              Cancel Payment
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Review Modal */}
       {showReviewModal && (
