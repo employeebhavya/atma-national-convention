@@ -84,6 +84,21 @@ function Team() {
             </div>
             <div className="flex flex-col gap-2">
               <Image
+                src="/team/7.png"
+                alt="Dr. Geetha Sivasubramaniam, MD"
+                width={372}
+                height={395}
+                className="object-cover"
+                loading="lazy"
+                quality={100}
+              />
+              <h3 className="text-lg font-semibold">
+                Dr. Rajesh Rangaswamy, MD
+              </h3>
+              <p className="text-sm text-gray-600">ATMA. California State</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Image
                 src="/team/4.png"
                 alt="Dr. Geetha Sivasubramaniam, MD"
                 width={372}
@@ -128,22 +143,6 @@ function Team() {
               />
               <h3 className="text-lg font-semibold">
                 Mr. Prabhu Venkatesh Subramanian
-              </h3>
-              <p className="text-sm text-gray-600">ATMA. California State</p>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <Image
-                src="/team/7.png"
-                alt="Dr. Geetha Sivasubramaniam, MD"
-                width={372}
-                height={395}
-                className="object-cover"
-                loading="lazy"
-                quality={100}
-              />
-              <h3 className="text-lg font-semibold">
-                Dr. Rajesh Rangaswamy, MD
               </h3>
               <p className="text-sm text-gray-600">ATMA. California State</p>
             </div>

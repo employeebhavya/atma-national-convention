@@ -641,8 +641,13 @@ export default function RegistrationForm1() {
   const EARLY_BIRD_DISCOUNT_PERCENTAGE = 10;
   const EARLY_BIRD_END_DATE = new Date("2025-07-20T23:59:59");
 
-  // Check if early bird discount is active
+  // Check if early bird discount is active and applicable
   const isEarlyBirdActive = () => {
+    // Don't apply discount to Yosemite trip
+    if (formData.registrationType === "yosemite_trip") {
+      return false;
+    }
+
     const currentDate = new Date();
     return currentDate <= EARLY_BIRD_END_DATE;
   };
