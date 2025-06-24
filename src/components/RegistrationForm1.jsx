@@ -63,7 +63,7 @@ export default function RegistrationForm1() {
       value: "platinum_family",
       amount: 1950,
       description: [
-        "Spouse and Blood Relatives",
+        "Physician and Family",
         "Front Row Seating & Recognition",
         "Stage time 5 mins",
         "Awardee for Winners",
@@ -76,6 +76,7 @@ export default function RegistrationForm1() {
       value: "gold_couple",
       amount: 1450,
       description: [
+        "Physician and Spouse only",
         "Reservation for next Row to Platinum group",
         "Stage time 3 mins",
         "Half Page of Souvenir for Featuring Family Photos & Achievements",

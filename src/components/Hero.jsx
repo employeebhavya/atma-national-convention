@@ -47,7 +47,7 @@ function Hero() {
               </div>
             </div>
           </div>
-          <h3 className="text-xl sm:text-3xl text-black mt-2">
+          <h3 className="text-xl font-bold sm:text-3xl text-[#cf1941] mt-2">
             Fresno Masonic Hall, California
           </h3>
         </div>

@@ -5,8 +5,8 @@ import React from "react";
 function AriseAwake() {
   return (
     <section className="relative py-14 bg-[#DEDEDE]">
-      <div className="container flex flex-col lg:flex-row gap-8 items-center">
-        <div className="w-full lg:w-[160%] 2xl:w-full h-auto relative">
+      <div className="container grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div className="col-span-1 h-auto relative">
           <Image
             src="/arise.png"
             alt="arise"
@@ -15,13 +15,13 @@ function AriseAwake() {
             className="w-full h-auto"
           />
         </div>
-        <div className=" flex flex-col gap-3">
+        <div className="col-span-2 flex flex-col gap-3">
           <h2 className="text-3xl text-black flex gap-4 items-center">
-            <span className="text-[#2f41dd] font-bold">Arise!</span>
-            <span className="text-[#ff600e] font-bold">Awake!!</span>
-            <span className="text-[#cc415e] font-bold">Achieve!!!</span>
+            <span className="text-[#DC1D46] font-bold">Arise!</span>
+            <span className="text-[#FF600E] font-bold">Awake!!</span>
+            <span className="text-[#2E41DD] font-bold">Achieve!!!</span>
           </h2>
-          <p className="text-sm 2xl:text-base text-black font-semibold">
+          <p className="text-sm 2xl:text-base text-[#DC1D46] font-bold">
             Do What you Can ! <br />
             With what you have !! <br />
             Where You are !!! <br />
@@ -33,19 +33,6 @@ function AriseAwake() {
             a small effort in America has now united hundreds of medical
             professionals, becoming a pillar of humanity — likened to a banyan
             tree with its massive tentacles (ஆலமரத்தின் விழுதுகள் போலும்).
-          </p>
-          <p>
-            Our knowledge and care must always serve as noble acts that give
-            life, uplift, and support the underserved.
-            <br />{" "}
-            <span className="text-base font-semibold italic">— ATMA</span>
-          </p>
-          <p>
-            In January 2005, a group of ten Tamil physicians in the United
-            States established the American Tamil Medical Association (ATMA).
-            Now, there are more than 800 physicians and allied healthcare
-            professionals as members, and the membership is growing. It is a
-            501(c)(3), IRS tax-exempt, charitable organization.
           </p>
           <p>
             We, as the California chapter of ATMA, are privileged and proud to
@@ -68,6 +55,11 @@ function AriseAwake() {
             >
               atmausa.org
             </Link>
+          </p>
+          <p>
+            <span className="text-base font-semibold italic">
+              - By ATMA National Convention Team{" "}
+            </span>
           </p>
         </div>
       </div>
