@@ -17,9 +17,9 @@ function AriseAwake() {
         </div>
         <div className="col-span-2 flex flex-col gap-3">
           <h2 className="text-3xl text-black flex gap-4 items-center">
-            <span className="text-[#DC1D46] font-bold">Arise!</span>
-            <span className="text-[#FF600E] font-bold">Awake!!</span>
-            <span className="text-[#2E41DD] font-bold">Achieve!!!</span>
+            <span className="text-[#DC1D46]">Arise!</span>
+            <span className="text-[#FF600E]">Awake!!</span>
+            <span className="text-[#2E41DD]">Achieve!!!</span>
           </h2>
           <p className="text-sm 2xl:text-base text-[#DC1D46] font-bold">
             Do What you Can ! <br />

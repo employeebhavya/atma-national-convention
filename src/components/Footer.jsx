@@ -13,7 +13,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Contact 1 */}
           <div className="bg-gray-200 p-6 rounded-lg hover:bg-gray-300 transition-colors">
-            <h4 className="text-lg font-semibold text-black mb-3">
+            <h4 className="text-lg text-black mb-3">
               Dr. Rajarathinam Subramaniam
             </h4>
             <p className="text-black mb-1">
@@ -46,9 +46,7 @@ const Footer = () => {
 
           {/* Contact 2 */}
           <div className="bg-gray-200 p-6 rounded-lg hover:bg-gray-300 transition-colors flex flex-col justify-center">
-            <h4 className="text-lg font-semibold text-black mb-2">
-              Subbulakshmi Jeyaram
-            </h4>
+            <h4 className="text-lg text-black mb-2">Subbulakshmi Jeyaram</h4>
             <div className="space-y-2 mt-2">
               <div className="flex items-center">
                 <svg
@@ -76,9 +74,7 @@ const Footer = () => {
 
           {/* Contact 3 */}
           <div className="bg-gray-200 p-6 rounded-lg hover:bg-gray-300 transition-colors flex flex-col justify-center">
-            <h4 className="text-lg font-semibold text-black mb-2">
-              Guru Prasath (India)
-            </h4>
+            <h4 className="text-lg text-black mb-2">Guru Prasath (India)</h4>
             <div className="space-y-2 mt-2">
               <div className="flex items-center">
                 <svg

@@ -22,7 +22,7 @@ function Team() {
                 loading="lazy"
                 quality={100}
               />
-              <h3 className="text-lg font-semibold">Dr. Rajammal Jayakumar</h3>
+              <h3 className="text-lg">Dr. Rajammal Jayakumar</h3>
               <p className="text-sm text-gray-600">
                 National President/National Convention Chair
               </p>
@@ -37,9 +37,7 @@ function Team() {
                 loading="lazy"
                 quality={100}
               />
-              <h3 className="text-lg font-semibold">
-                Dr. Rajarathinam Subramaniam
-              </h3>
+              <h3 className="text-lg">Dr. Rajarathinam Subramaniam</h3>
               <p className="text-sm text-gray-600">
                 National Convention Chair, ATMA 2025
               </p>
@@ -54,7 +52,7 @@ function Team() {
                 loading="lazy"
                 quality={100}
               />
-              <h3 className="text-lg font-semibold">
+              <h3 className="text-lg">
                 Dr. Thillakarasi Kannappan,
                 <br /> MD Gynecologist
               </h3>
@@ -70,9 +68,7 @@ function Team() {
                 loading="lazy"
                 quality={100}
               />
-              <h3 className="text-lg font-semibold">
-                Dr. Einstein Arunachalam, MD
-              </h3>
+              <h3 className="text-lg">Dr. Einstein Arunachalam, MD</h3>
               <p className="text-sm text-gray-600">ATMA Board Member</p>
             </div>
             <div className="flex flex-col gap-2">
@@ -85,9 +81,7 @@ function Team() {
                 loading="lazy"
                 quality={100}
               />
-              <h3 className="text-lg font-semibold">
-                Dr. Rajesh Rangaswamy, MD
-              </h3>
+              <h3 className="text-lg">Dr. Rajesh Rangaswamy, MD</h3>
               <p className="text-sm text-gray-600">
                 Former Governor, West Coast Chapter
               </p>
@@ -102,9 +96,7 @@ function Team() {
                 loading="lazy"
                 quality={100}
               />
-              <h3 className="text-lg font-semibold">
-                Dr. Geetha Sivasubramaniam, MD
-              </h3>
+              <h3 className="text-lg">Dr. Geetha Sivasubramaniam, MD</h3>
               <p className="text-sm text-gray-600">
                 Secretary, ATMA California State
               </p>
@@ -119,9 +111,7 @@ function Team() {
                 loading="lazy"
                 quality={100}
               />
-              <h3 className="text-lg font-semibold">
-                Dr. Anandhi Narasimhan, MD
-              </h3>
+              <h3 className="text-lg">Dr. Anandhi Narasimhan, MD</h3>
               <p className="text-sm text-gray-600">
                 Culture and Entertainment Secretary ATMA California
               </p>
@@ -136,9 +126,7 @@ function Team() {
                 loading="lazy"
                 quality={100}
               />
-              <h3 className="text-lg font-semibold">
-                Mr. Prabhu Venkatesh Subramanian
-              </h3>
+              <h3 className="text-lg">Mr. Prabhu Venkatesh Subramanian</h3>
               <p className="text-sm text-gray-600">ATMA California</p>
             </div>
           </div>
