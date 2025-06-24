@@ -3,7 +3,7 @@ import React from "react";
 function ThreeDaysEvent() {
   return (
     <section className="relative py-14 bg-[url('/three-bg.png')] bg-cover">
-      <div className="container flex flex-col gap-6">
+      <div className="container flex flex-col gap-12">
         <h2 className="text-2xl lg:text-3xl text-center text-white text-shadow-lg">
           Three Days - Events Snap Shot
         </h2>
