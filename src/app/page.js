@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <section className="w-full h-25 bg-[#dc1d46]"></section>
+      <section className="w-full h-25 bg-[url('/texture.png')] bg-cover bg-center bg-no-repeat"></section>
       <AriseAwake />
       <AtmaConvention />
       <SpecialHighlights />
