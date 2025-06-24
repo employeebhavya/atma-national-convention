@@ -92,7 +92,7 @@ function ThreeDaysEvent() {
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-20 lg:pl-40 lg:items-center">
             <div className="felx">
               <h4 className="bg-[#dc1d46] text-white px-4 py-2 w-fit text-center">
-                Sunday, August 24th
+                Monday, August 25th
               </h4>
             </div>
             <div>
