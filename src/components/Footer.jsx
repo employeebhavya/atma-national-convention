@@ -17,7 +17,7 @@ const Footer = () => {
               Dr. Rajarathinam Subramaniam
             </h4>
             <p className="text-black mb-1">
-              National Convention Chair, ATMA 2025
+              National Convention Co-Chair Governor
             </p>
             <div className="space-y-2 mt-4">
               <div className="flex items-center">

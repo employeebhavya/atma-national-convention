@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
 
 const marcellus = Marcellus({
   variable: "--font-marcellus",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
         <Header />
         {children}
         <Footer />
+        <BackToTop />
       </body>
     </html>
   );
