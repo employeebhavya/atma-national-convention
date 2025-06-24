@@ -41,9 +41,7 @@ function Team() {
                 Dr. Rajarathinam Subramaniam
               </h3>
               <p className="text-sm text-gray-600">
-                National Convention Co-Chair Governor, California State
-                <br />
-                and West Coast Chapter
+                National Convention Chair, ATMA 2025
               </p>
             </div>
             <div className="flex flex-col gap-2">
@@ -60,10 +58,7 @@ function Team() {
                 Dr. Thillakarasi Kannappan,
                 <br /> MD Gynecologist
               </h3>
-              <p className="text-sm text-gray-600">
-                Deputy Governor - California State and <br />
-                West Coast Chapter
-              </p>
+              <p className="text-sm text-gray-600">Deputy Governor</p>
             </div>
             <div className="flex flex-col gap-2">
               <Image
@@ -78,9 +73,7 @@ function Team() {
               <h3 className="text-lg font-semibold">
                 Dr. Einstein Arunachalam, MD
               </h3>
-              <p className="text-sm text-gray-600">
-                ATMA, Former Governor West Coast Chapter
-              </p>
+              <p className="text-sm text-gray-600">ATMA Board Member</p>
             </div>
             <div className="flex flex-col gap-2">
               <Image
@@ -95,7 +88,9 @@ function Team() {
               <h3 className="text-lg font-semibold">
                 Dr. Rajesh Rangaswamy, MD
               </h3>
-              <p className="text-sm text-gray-600">ATMA. California State</p>
+              <p className="text-sm text-gray-600">
+                Former Governor, West Coast Chapter
+              </p>
             </div>
             <div className="flex flex-col gap-2">
               <Image
@@ -144,7 +139,7 @@ function Team() {
               <h3 className="text-lg font-semibold">
                 Mr. Prabhu Venkatesh Subramanian
               </h3>
-              <p className="text-sm text-gray-600">ATMA. California State</p>
+              <p className="text-sm text-gray-600">ATMA California</p>
             </div>
           </div>
         </div>
