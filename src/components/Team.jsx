@@ -22,9 +22,9 @@ function Team() {
                 loading="lazy"
                 quality={100}
               />
-              <h3 className="text-lg">Dr. Rajammal Jayakumar</h3>
-              <p className="text-sm text-gray-600">
-                National President/National Convention Chair
+              <h3 className="text-lg">Dr. Rajammal Jayakumar, MD</h3>
+              <p className="text-sm text-gray-600 max-w-[90%] md:max-w-full">
+                President ATMA USA/ Chair - ATMA National Convention 2025
               </p>
             </div>
             <div className="flex flex-col gap-2">
@@ -37,9 +37,10 @@ function Team() {
                 loading="lazy"
                 quality={100}
               />
-              <h3 className="text-lg">Dr. Rajarathinam Subramaniam</h3>
-              <p className="text-sm text-gray-600">
-                National Convention Chair, ATMA 2025
+              <h3 className="text-lg">Dr. Rajarathinam Subramaniam, MD</h3>
+              <p className="text-sm text-gray-600 max-w-[90%] md:max-w-full">
+                National ATMA Convention Co-Chair / Governor, ATMA West Coast
+                Chapter
               </p>
             </div>
             <div className="flex flex-col gap-2">
@@ -56,7 +57,9 @@ function Team() {
                 Dr. Thillakarasi Kannappan,
                 <br /> MD Gynecologist
               </h3>
-              <p className="text-sm text-gray-600">Deputy Governor</p>
+              <p className="text-sm text-gray-600 max-w-[90%] md:max-w-full">
+                Deputy Governor - California State and West Coast Chapter
+              </p>
             </div>
             <div className="flex flex-col gap-2">
               <Image
@@ -69,7 +72,7 @@ function Team() {
                 quality={100}
               />
               <h3 className="text-lg">Dr. Einstein Arunachalam, MD</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 max-w-[90%] md:max-w-full">
                 Former Governor, West Coast Chapter / Board Member, ATMA
               </p>
             </div>
