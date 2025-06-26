@@ -9,12 +9,12 @@ const atmaList = [
   },
   {
     img: "/images/cultural-celeb.png",
-    title: "Cultural Celebration",
+    title: "Culinary Delight",
     desc: `Join Us for a Feast of Fire & Flavor - A Chettinad Culinary Celebration!`,
   },
   {
     img: "/images/vibrant-ent.png",
-    title: "Vibrant Entertainment",
+    title: "Cultural Celebration",
     desc: `Enjoy live performances, entertainment, and cinematic experiences.`,
   },
   {
