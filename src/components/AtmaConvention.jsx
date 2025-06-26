@@ -8,14 +8,14 @@ const atmaList = [
     desc: `Connect with like-minded professionals across specialties.`,
   },
   {
-    img: "/images/cultural-celeb.png",
-    title: "Culinary Delight",
-    desc: `Join Us for a Feast of Fire & Flavor - A Chettinad Culinary Celebration!`,
-  },
-  {
     img: "/images/vibrant-ent.png",
     title: "Cultural Celebration",
     desc: `Enjoy live performances, entertainment, and cinematic experiences.`,
+  },
+  {
+    img: "/images/cultural-celeb.png",
+    title: "Culinary Delight",
+    desc: `Join Us for a Feast of Fire & Flavor - A Chettinad Culinary Celebration!`,
   },
   {
     img: "/images/family-bond.png",
