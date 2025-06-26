@@ -6,7 +6,7 @@ function AriseAwake() {
   return (
     <section className="relative py-14 bg-[#DEDEDE]">
       <div className="container grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-        <div className="col-span-1 h-auto relative">
+        <div className="lg:col-span-1 h-auto relative">
           <Image
             src="/arise.png"
             alt="arise"
@@ -15,7 +15,7 @@ function AriseAwake() {
             className="w-full h-auto"
           />
         </div>
-        <div className="col-span-2 flex flex-col gap-3">
+        <div className="lg:col-span-2 flex flex-col gap-3">
           <h2 className="text-3xl text-black flex gap-4 items-center">
             <span className="text-[#DC1D46]">Arise!</span>
             <span className="text-[#FF600E]">Awake!!</span>

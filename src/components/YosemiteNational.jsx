@@ -5,7 +5,7 @@ function YosemiteNational() {
   return (
     <section className="my-14 relative" id="yosemite-national">
       <div className="container grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-        <div className="col-span-1">
+        <div className="lg:col-span-1">
           <Image
             src="/yosemite.png"
             alt="Yosemite National Park"
@@ -14,7 +14,7 @@ function YosemiteNational() {
             className="w-full h-auto object-cover"
           />
         </div>
-        <div className="col-span-2 flex flex-col gap-6">
+        <div className="lg:col-span-2 flex flex-col gap-6">
           <h2 className="text-2xl lg:text-3xl text-black mb-2">
             Yosemite National Park Tour
           </h2>

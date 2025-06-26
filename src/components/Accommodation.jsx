@@ -6,7 +6,7 @@ function Accommodation() {
   return (
     <section className="my-14 relative py-14 bg-[#DEDEDE]">
       <div className="container grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-        <div className="col-span-1">
+        <div className="lg:col-span-1">
           <Image
             src="/accomod.png"
             alt="Accommodation"
@@ -15,7 +15,7 @@ function Accommodation() {
             className="w-full h-auto"
           />
         </div>
-        <div className="col-span-2 flex flex-col gap-2">
+        <div className="lg:col-span-2 flex flex-col gap-2">
           <h2 className="text-2xl lg:text-3xl text-black">Accommodation</h2>
           <p className="text-base text-black">
             <strong>Hotel Stay:</strong> DoubleTree by Hilton, Fresno Downtown
