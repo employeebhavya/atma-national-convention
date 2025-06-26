@@ -69,7 +69,9 @@ function Team() {
                 quality={100}
               />
               <h3 className="text-lg">Dr. Einstein Arunachalam, MD</h3>
-              <p className="text-sm text-gray-600">ATMA Board Member</p>
+              <p className="text-sm text-gray-600">
+                Former Governor, West Coast Chapter / Board Member, ATMA
+              </p>
             </div>
             <div className="flex flex-col gap-2">
               <Image
@@ -127,7 +129,9 @@ function Team() {
                 quality={100}
               />
               <h3 className="text-lg">Mr. Prabhu Venkatesh Subramanian</h3>
-              <p className="text-sm text-gray-600">ATMA California</p>
+              <p className="text-sm text-gray-600">
+                PRO (Public Relations Officer), ATMA West Coast Chapter
+              </p>
             </div>
           </div>
         </div>
