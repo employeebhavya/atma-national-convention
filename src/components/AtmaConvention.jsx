@@ -3,22 +3,22 @@ import React from "react";
 
 const atmaList = [
   {
-    img: "/images/medical.webp",
+    img: "/images/medical-networking.png",
     title: "Medical Networking",
     desc: `Connect with like-minded professionals across specialties.`,
   },
   {
-    img: "/images/cultural.png",
+    img: "/images/cultural-celeb.png",
     title: "Cultural Celebration",
-    desc: `Indulge in South Indian flavors and fusion cuisine.`,
+    desc: `Join Us for a Feast of Fire & Flavor - A Chettinad Culinary Celebration!`,
   },
   {
-    img: "/images/vibrant.png",
+    img: "/images/vibrant-ent.png",
     title: "Vibrant Entertainment",
     desc: `Enjoy live performances, entertainment, and cinematic experiences.`,
   },
   {
-    img: "/images/family.webp",
+    img: "/images/family-bond.png",
     title: "Family Bonding",
     desc: `Grow together as the ATMA family while celebrating shared purpose and pride.`,
   },

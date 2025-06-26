@@ -76,7 +76,7 @@ export default function RegistrationForm1() {
       value: "gold_couple",
       amount: 1450,
       description: [
-        "Physician and Spouse only",
+        "Physician and Spouse",
         "Reservation for next Row to Platinum group",
         "Stage time 3 mins",
         "Half Page of Souvenir for Featuring Family Photos & Achievements",
